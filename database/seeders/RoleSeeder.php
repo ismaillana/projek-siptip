@@ -28,11 +28,20 @@ class RoleSeeder extends Seeder
                 'guard_name'=> 'web'
             ],
             [
-                'name'      => 'karyawan',
+                'name'      => 'karyawan-senior',
+                'guard_name'=> 'web'
+            ],
+            [
+                'name'      => 'karyawan-junior',
                 'guard_name'=> 'web'
             ],
         ];
     
-        Role::insert($roles);
+        foreach ($roles as $role) {
+            Role::updateOrCreate(
+                ['name' => $role['name'], 'guard_name' => $role['guard_name']],
+                $role
+            );
+        }
     }
 }

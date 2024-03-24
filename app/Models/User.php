@@ -18,10 +18,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+    protected $guarded   = [
+        'id',
     ];
 
     /**
@@ -43,4 +41,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get all of the Karyawan for the Karyawan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function karyawan(): HasMany
+    {
+        return $this->hasMany(Karyawan::class);
+    }
 }

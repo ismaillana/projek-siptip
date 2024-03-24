@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashbaordController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\KaryawanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+Route::group(
+    [
+        'middleware'    => ['role:admin-it'],
+        'prefix'        => 'admin-it'
+    ],
+    function () {
+        Route::resource('user', App\Http\Controllers\UserController::class);
+        Route::resource('karyawan', App\Http\Controllers\KaryawanController::class);
+});
