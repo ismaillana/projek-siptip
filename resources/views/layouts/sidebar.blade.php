@@ -8,34 +8,15 @@
       </div>
 
       <ul class="sidebar-menu">
-        {{-- @role('super-admin')
-          <li class="menu-header">Dashboard Super Admin</li>
+        @role('admin-corporate')
+          <li class="menu-header">Dashboard Admin Corporate</li>
             <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
               <a href="{{route('dashboard')}}" class="nav-link">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span></a>
             </li>
-          <li class="menu-header">Master Data</li>
-            <li class="nav-item dropdown {{ request()->is('super-admin/jurusan*') ? 'active' : ''}} ||
-              {{ request()->is('super-admin/prodi*') ? 'active' : ''}} ||">
-              <a class="nav-link has-dropdown" data-toggle="dropdown">
-                <i class="fas fa-columns"></i> 
-                  <span>Master Data</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="{{ request()->is('super-admin/jurusan*') ? 'active' : ''}}">
-                  <a class="nav-link" href="{{ route('jurusan.index') }}">
-                    Jurusan
-                  </a>
-                </li>
-                <li class="{{ request()->is('super-admin/prodi*') ? 'active' : ''}}">
-                  <a class="nav-link" href="{{route('prodi.index')}}">
-                    Program Studi
-                  </a>
-                </li>
-              </ul>
-            </li>
-          <li class="menu-header">Manajemen User</li>
+          
+          {{-- <li class="menu-header">Manajemen User</li>
             <li class="nav-item dropdown 
               {{ request()->is('super-admin/adminJurusan*') ? 'active' : ''}} ||
               {{ request()->is('super-admin/bagianAkademik*') ? 'active' : ''}} ||">
@@ -103,8 +84,8 @@
             <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
               <i class="fas fa-rocket"></i> Documentation
             </a>
-          </div>
-        @endrole --}}
+          </div> --}}
+        @endrole
       </ul>
     </aside>
   </div>
