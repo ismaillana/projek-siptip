@@ -13,11 +13,6 @@ return new class extends Migration
     {
         Schema::create('kaderisasis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                ->nullable()
-                ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
             $table->integer('id_karyawan_junior');
             $table->integer('id_karyawan_senior');
             $table->integer('id_admin_corporate');

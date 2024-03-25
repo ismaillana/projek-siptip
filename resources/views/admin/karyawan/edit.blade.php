@@ -85,6 +85,22 @@
                             </div>
 
                             <div class="mb-3 row">
+                                <label for="tanggal_lahir" class="col-md-2 col-form-label">Tanggal Lahir <sup
+                                        class="text-danger">*</sup></label>
+                                <div class="col-md-10">
+                                    <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror"
+                                        id="tanggal_lahir" name="tanggal_lahir" placeholder="Masukan Tanggal Lahir"
+                                        value="{{ old('tanggal_lahir', @$karyawan->tanggal_lahir) }}">
+
+                                    @if ($errors->has('tanggal_lahir'))
+                                        <span class="text-danger">
+                                            {{ $errors->first('tanggal_lahir') }}
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
                                 <label for="organisasi" class="col-md-2 col-form-label">Organisasi <sup
                                         class="text-danger">*</sup></label>
                                 <div class="col-md-10">
@@ -143,22 +159,6 @@
                                     @if ($errors->has('alamat'))
                                         <span class="text-danger">
                                             {{ $errors->first('alamat') }}
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="mb-3 row">
-                                <label for="tanggal_lahir" class="col-md-2 col-form-label">Tanggal Lahir <sup
-                                        class="text-danger">*</sup></label>
-                                <div class="col-md-10">
-                                    <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror"
-                                        id="tanggal_lahir" name="tanggal_lahir" placeholder="Masukan Tanggal Lahir"
-                                        value="{{ old('tanggal_lahir', @$karyawan->tanggal_lahir) }}">
-
-                                    @if ($errors->has('tanggal_lahir'))
-                                        <span class="text-danger">
-                                            {{ $errors->first('tanggal_lahir') }}
                                         </span>
                                     @endif
                                 </div>

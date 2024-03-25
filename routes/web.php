@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashbaordController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\KaderisasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+Route::group(
+    [
+        'middleware'    => ['role:admin-corporate'],
+        'prefix'        => 'admin-corporate'
+    ],
+    function () {
+        Route::resource('kaderisasi', App\Http\Controllers\KaderisasiController::class);
+});
 
 Route::group(
     [
