@@ -23,7 +23,8 @@ class UserController extends Controller
         })->get();
 
         return view('admin.user.index', [
-            'users' => $users
+            'users' => $users,
+            'title'    => 'Pengguna'
         ]);
     }
 
@@ -36,6 +37,7 @@ class UserController extends Controller
     
         return view('admin.user.tambah', [
             'role'      => $role,
+            'title'    => 'Tambah Pengguna'
         ]);
     }
 
@@ -100,6 +102,7 @@ class UserController extends Controller
             'user'      => $user,
             'role'      => $role,
             'userRoles' => $userRoles,
+            'title'    => 'Edit Pengguna'
         ]);
     }
 

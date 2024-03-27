@@ -51,7 +51,7 @@ class KaderisasiController extends Controller
             'managers'            => $managers,
             'karyawanJunior'      => $karyawanJunior,
             'karyawanSenior'      => $karyawanSenior,
-            'title'               => 'Tambah Karyawan'
+            'title'               => 'Tambah Kaderisasi'
         ]);
     }
 
@@ -115,6 +115,7 @@ class KaderisasiController extends Controller
             'karyawanJunior'      => $karyawanJunior,
             'karyawanSenior'      => $karyawanSenior,
             'kaderisasi'          => $kaderisasi,
+            'title'               => 'Edit Kaderisasi'
         ]);
     }
 

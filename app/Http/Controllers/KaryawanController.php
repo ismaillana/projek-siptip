@@ -23,7 +23,8 @@ class KaryawanController extends Controller
         $karyawan = Karyawan::all();
 
         return view('admin.karyawan.index', [
-            'karyawan' => $karyawan
+            'karyawan' => $karyawan,
+            'title'    => 'Karyawan'
         ]);
     }
 
@@ -36,6 +37,7 @@ class KaryawanController extends Controller
     
         return view('admin.karyawan.tambah', [
             'role'      => $role,
+            'title'    => 'Tambah Karyawan'
         ]);
     }
 
@@ -126,6 +128,7 @@ class KaryawanController extends Controller
         return view('admin.karyawan.edit', [
             'karyawan'  => $karyawan,
             'role'      => $role,
+            'title'    => 'Edit Karyawan'
         ]);
     }
 
