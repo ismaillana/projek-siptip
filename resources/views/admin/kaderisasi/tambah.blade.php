@@ -99,10 +99,10 @@
                             </div>
 
                             <div class="mb-3 row">
-                                <label for="uraian_keilmuan" class="col-md-2 col-form-label">uraian_keilmuan <sup
+                                <label for="uraian_keilmuan" class="col-md-2 col-form-label">Uraian Keilmuan <sup
                                         class="text-danger">*</sup></label>
                                 <div class="col-md-10">
-                                    <textarea type="text" class="summernote-simple" id="uraian_keilmuan" name="uraian_keilmuan" placeholder="Masukan Judul Pekerjaan">
+                                    <textarea type="text" class="summernote-simple" id="uraian_keilmuan" name="uraian_keilmuan" placeholder="Masukan Urauan Keilmuan">
                                         {{ old('uraian_keilmuan', @$kaderisasi->uraian_keilmuan) }}
                                     </textarea>
 

@@ -27,7 +27,8 @@ class KaderisasiController extends Controller
                     ->get();
 
         return view('admin.kaderisasi.index', [
-            'kaderisasi' => $kaderisasi
+            'kaderisasi' => $kaderisasi,
+            'title'      => 'Kaderisasi'
         ]);
     }
 
@@ -50,6 +51,7 @@ class KaderisasiController extends Controller
             'managers'            => $managers,
             'karyawanJunior'      => $karyawanJunior,
             'karyawanSenior'      => $karyawanSenior,
+            'title'               => 'Tambah Karyawan'
         ]);
     }
 

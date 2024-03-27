@@ -38,5 +38,17 @@ class UserSeeder extends Seeder
         );
         
         $user->assignRole('admin-it');
+
+        $user = User::updateOrCreate(
+            ['email' => 'manager@gmail.com'], 
+            [
+                'name' => 'Manager',
+                'username' => 'manager', 
+                'email' => 'manager@gmail.com',
+                'password' => Hash::make('password'),
+            ]
+        );
+        
+        $user->assignRole('manager');
     }
 }

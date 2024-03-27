@@ -6,6 +6,7 @@ use App\Http\Controllers\DashbaordController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\KaderisasiController;
+use App\Http\Controllers\PenugasanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,13 @@ Route::group(
     function () {
         Route::resource('user', App\Http\Controllers\UserController::class);
         Route::resource('karyawan', App\Http\Controllers\KaryawanController::class);
+});
+
+Route::group(
+    [
+        'middleware'    => ['role:manager'],
+        'prefix'        => 'manager'
+    ],
+    function () {
+        Route::resource('penugasan', App\Http\Controllers\PenugasanController::class);
 });

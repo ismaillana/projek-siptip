@@ -4,112 +4,108 @@
     <section class="section">
       <div class="section-header">
         <div class="section-header-back">
-          <a href="{{route('kaderisasi.index')}}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+          <a href="{{route('penugasan.index')}}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
         </div>
         <h1>
-            Edit Data Kaderisasi
+            Edit Data Penugasan
         </h1>
       </div>
 
       <form id="myForm" class="forms-sample" enctype="multipart/form-data" method="POST"
-        action="{{route('kaderisasi.update', $kaderisasi) }}">
+        action="{{route('penugasan.update', $penugasan) }}">
         @method('put')
         {{ csrf_field() }}
         <div class="section-body">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <h5 class="card-header">Form Kaderisasi</h5>
+                        <h5 class="card-header">Form Penugasan</h5>
                         <div class="card-body">
                             <div class="mb-3 row">
-                                <label for="id_manager" class="col-md-2 col-form-label">Manager <sup
+                                <label for="kaderisasi_id" class="col-md-2 col-form-label">Kaderisasi <sup
                                         class="text-danger">*</sup></label>
                                 <div class="col-md-10">
-                                    <select name="id_manager"
-                                        class="form-control select2 @error('id_manager') is-invalid @enderror">
+                                    <select name="kaderisasi_id"
+                                        class="form-control select2 @error('kaderisasi_id') is-invalid @enderror">
                                         <option value="" selected="" disabled="">
-                                            Pilih Manager
+                                            Pilih Kaderisasi
                                         </option>
 
-                                        @foreach ($managers as $item)
+                                        @foreach ($kaderisasi as $item)
                                             <option value="{{ $item->id }}"
-                                                {{ old('id_manager', @$kaderisasi->id_manager) == $item->id ? 'selected' : '' }}>
-                                                {{ $item->name }}
+                                                {{ old('kaderisasi_id', @$penugasan->kaderisasi_id) == $item->id ? 'selected' : '' }}>
+                                                {{ $item->id }}
                                             </option>
                                         @endforeach
                                     </select>
 
-                                    @if ($errors->has('id_manager'))
+                                    @if ($errors->has('kaderisasi_id'))
                                         <span class="text-danger">
-                                            {{ $errors->first('id_manager') }}
+                                            {{ $errors->first('kaderisasi_id') }}
                                         </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="mb-3 row">
-                                <label for="id_karyawan_senior" class="col-md-2 col-form-label">Karyawan Senior <sup
+                                <label for="tugas" class="col-md-2 col-form-label">Tugas <sup
                                         class="text-danger">*</sup></label>
                                 <div class="col-md-10">
-                                    <select name="id_karyawan_senior"
-                                        class="form-control select2 @error('id_karyawan_senior') is-invalid @enderror">
-                                        <option value="" selected="" disabled="">
-                                            Pilih Karyawan Senior
-                                        </option>
+                                    <input type="text" class="form-control @error('tugas') is-invalid @enderror"
+                                        id="tugas" name="tugas" placeholder="Masukan Tugas"
+                                        value="{{ old('tugas', @$penugasan->tugas) }}">
 
-                                        @foreach ($karyawanSenior as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ old('id_karyawan_senior', @$kaderisasi->id_karyawan_senior) == $item->id ? 'selected' : '' }}>
-                                                {{ $item->nama_lengkap }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    
-                                    @if ($errors->has('id_karyawan_senior'))
+                                    @if ($errors->has('tugas'))
                                         <span class="text-danger">
-                                            {{ $errors->first('id_karyawan_senior') }}
+                                            {{ $errors->first('tugas') }}
                                         </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="mb-3 row">
-                                <label for="id_karyawan_junior" class="col-md-2 col-form-label">Karyawan Junior <sup
+                                <label for="tanggal_awal" class="col-md-2 col-form-label">Tanggal Awal <sup
                                         class="text-danger">*</sup></label>
                                 <div class="col-md-10">
-                                    <select name="id_karyawan_junior"
-                                        class="form-control select2 @error('id_karyawan_junior') is-invalid @enderror">
-                                        <option value="" selected="" disabled="">
-                                            Pilih Karyawan Junior
-                                        </option>
+                                    <input type="date" class="form-control @error('tanggal_awal') is-invalid @enderror"
+                                        id="tanggal_awal" name="tanggal_awal" placeholder="Masukan Tanggal Awal"
+                                        value="{{ old('tanggal_awal', @$penugasan->tanggal_awal) }}">
 
-                                        @foreach ($karyawanJunior as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ old('id_karyawan_junior', @$kaderisasi->id_karyawan_junior) == $item->id ? 'selected' : '' }}>
-                                                {{ $item->nama_lengkap }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    
-                                    @if ($errors->has('id_karyawan_junior'))
+                                    @if ($errors->has('tanggal_awal'))
                                         <span class="text-danger">
-                                            {{ $errors->first('id_karyawan_junior') }}
+                                            {{ $errors->first('tanggal_awal') }}
                                         </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="mb-3 row">
-                                <label for="uraian_keilmuan" class="col-md-2 col-form-label">Uraian Keilmuan <sup
+                                <label for="tanggal_akhir" class="col-md-2 col-form-label">Tanggal Akhir <sup
                                         class="text-danger">*</sup></label>
                                 <div class="col-md-10">
-                                    <textarea type="text" class="summernote-simple" id="uraian_keilmuan" name="uraian_keilmuan" placeholder="Masukan Uraian Keilmuan">
-                                        {{ old('uraian_keilmuan', @$kaderisasi->uraian_keilmuan) }}
+                                    <input type="date" class="form-control @error('tanggal_akhir') is-invalid @enderror"
+                                        id="tanggal_akhir" name="tanggal_akhir" placeholder="Masukan Tanggal Akhir"
+                                        value="{{ old('tanggal_akhir', @$penugasan->tanggal_akhir) }}">
+
+                                    @if ($errors->has('tanggal_akhir'))
+                                        <span class="text-danger">
+                                            {{ $errors->first('tanggal_akhir') }}
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="uraian_penugasan" class="col-md-2 col-form-label">Uraian Penugasan <sup
+                                        class="text-danger">*</sup></label>
+                                <div class="col-md-10">
+                                    <textarea type="text" class="summernote-simple" id="uraian_penugasan" name="uraian_penugasan" placeholder="Masukan Uraian Penugasan">
+                                        {{ old('uraian_penugasan', @$penugasan->uraian_penugasan) }}
                                     </textarea>
 
-                                    @if ($errors->has('uraian_keilmuan'))
+                                    @if ($errors->has('uraian_penugasan'))
                                         <span class="text-danger">
-                                            {{ $errors->first('uraian_keilmuan') }}
+                                            {{ $errors->first('uraian_penugasan') }}
                                         </span>
                                     @endif
                                 </div>
