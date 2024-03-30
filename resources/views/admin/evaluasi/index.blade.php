@@ -4,7 +4,7 @@
 <div class="main-content">
     <section class="section">
       <div class="section-header">
-        <h1>Tabel Data Penugasan</h1>
+        <h1>Tabel Data Evaluasi</h1>
       </div>
 
       <div class="section-body">
@@ -14,14 +14,8 @@
               <div class="card-header">
                 <div class="d-flex justify-content-between w-100">
                     <h4>
-                        Data Penugasan
+                        Data Evaluasi
                     </h4>
-
-                    <a href="{{ route('penugasan.create') }}"
-                        class="btn btn-outline-success btn-lg d-flex align-items-center ">
-                        <i class="fa fa-plus pr-2"></i>
-                        Tambah
-                    </a>
                 </div>
               </div>
               <div class="card-body">
@@ -38,15 +32,15 @@
                         </th>
 
                         <th>
-                            Tanggal Awal
+                            Jurnal
                         </th>
 
                         <th>
-                            Tanggal Akhir
+                            Revisi
                         </th>
 
                         <th>
-                            Status
+                            Status Jurnal
                         </th>
 
                         <th style="width: 10%">
@@ -55,7 +49,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($penugasan as $item)
+                        @foreach ($evaluasi as $item)
                             <tr>
                                 <td>
                                     {{$loop->iteration}}
@@ -66,25 +60,39 @@
                                 </td>
 
                                 <td>
-                                    {{$item->tanggal_awal}}
+                                    @if ($item->file_jurnal !== null )
+                                        <a href="{{ asset('storage/file_jurnal/'. $item->file_jurnal)}}" 
+                                        download="{{$item->file_jurnal}}"
+                                        class="btn btn-sm btn-outline-primary" title="Download Hasil">
+                                            {{-- <i class="fas fa-download"> --}}
+                                            Unduh File
+                                        </a>
+                                    @else
+                                        Belum Ada Jurnal
+                                    @endif
                                 </td>
 
                                 <td>
-                                    {{$item->tanggal_akhir}}
+                                    @if ($item->file_revisi !== null )
+                                        <a href="{{ asset('storage/file_revisi/'. $item->file_revisi)}}" 
+                                        download="{{$item->file_revisi}}"
+                                        class="btn btn-sm btn-outline-primary" title="Download Hasil">
+                                            {{-- <i class="fas fa-download"> --}}
+                                            Unduh File
+                                        </a>
+                                    @else
+                                        Belum Ada Revisi
+                                    @endif
                                 </td>
 
                                 <td>
-                                    {{$item->status}}
+                                    {{$item->status_jurnal}}
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('penugasan.edit', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
+                                    <a href="{{ route('evaluasi.edit', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-
-                                    <button value="{{ route('penugasan.destroy', $item->id) }}" class="btn btn-sm btn-outline-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus"> 
-                                        <i class="fas fa-trash"></i>
-                                    </button>
                                 </td>
                             </tr>
                         @endforeach

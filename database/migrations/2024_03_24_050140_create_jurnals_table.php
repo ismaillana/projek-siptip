@@ -19,6 +19,8 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string('file_jurnal');
+            $table->string('file_revisi');
+            $table->text('uraian_revisi');
             $table->enum('status_jurnal', ['Belum Dikerjakan', 'Review', 'Revisi', 'Selesai'])->default('Belum Dikerjakan')->nullable();
             $table->timestamps();
         });

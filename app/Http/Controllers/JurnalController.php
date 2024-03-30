@@ -67,26 +67,30 @@ class JurnalController extends Controller
      */
     public function store(Request $request)
     {
-        {
-            $userId = Auth::id();
-    
-            $request->validate([
-                'penugasan_id'      => 'required',
-                'file_jurnal'       => 'required',
-            ], [
-                'penugasan_id.required'     => 'Pilih Penugasan',
-                'file_jurnal.required'      => 'Masukan File Jurnal',
-            ]);
-    
-            $file_jurnal = Jurnal::saveDokumen($request);
+        $userId = Auth::id();
 
-            $jurnal = Jurnal::create([
-                'penugasan_id'         => $request->penugasan_id,
-                'file_jurnal'          => $file_jurnal,
-            ]);
-    
-            return redirect()->route('jurnal.index')->with('success', 'Data Berhasil Ditambah');
-        }
+        $request->validate([
+            'penugasan_id'      => 'required',
+            'file_jurnal'       => 'required',
+        ], [
+            'penugasan_id.required'     => 'Pilih Penugasan',
+            'file_jurnal.required'      => 'Masukan File Jurnal',
+        ]);
+
+        $file_jurnal = Jurnal::saveDokumen($request);
+
+        $jurnal = Jurnal::create([
+            'penugasan_id'         => $request->penugasan_id,
+            'file_jurnal'          => $file_jurnal,
+            'status_jurnal'        => 'Review'
+        ]);
+
+        Penugasan::where('id', $request->penugasan_id)
+            ->update([
+            'status'    => 'Review'
+        ]);
+
+        return redirect()->route('jurnal.index')->with('success', 'Data Berhasil Ditambah');
     }
 
     /**
@@ -125,7 +129,8 @@ class JurnalController extends Controller
         ]);
 
         $data = [
-            'penugasan_id'         => $request->penugasan_id,
+            'penugasan_id'  => $request->penugasan_id,
+            'status_jurnal'        => 'Review'
         ];
 
         $file_jurnal = Jurnal::saveDokumen($request);
@@ -137,6 +142,11 @@ class JurnalController extends Controller
         }
         
         Jurnal::where('id', $id)->update($data);
+
+        Penugasan::where('id', $request->penugasan_id)
+            ->update([
+            'status'    => 'Review'
+        ]);
 
         return redirect()->route('jurnal.index')->with('success', 'Data Berhasil Diubah');
     }

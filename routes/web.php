@@ -8,6 +8,7 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\KaderisasiController;
 use App\Http\Controllers\PenugasanController;
 use App\Http\Controllers\JurnalController;
+use App\Http\Controllers\EvaluasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,4 +64,13 @@ Route::group(
     ],
     function () {
         Route::resource('jurnal', App\Http\Controllers\JurnalController::class);
+});
+
+Route::group(
+    [
+        'middleware'    => ['role:karyawan-senior'],
+        'prefix'        => 'karyawan-senior'
+    ],
+    function () {
+        Route::resource('evaluasi', App\Http\Controllers\EvaluasiController::class);
 });
