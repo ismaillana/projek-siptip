@@ -28,7 +28,7 @@ class KaderisasiController extends Controller
 
         return view('admin.kaderisasi.index', [
             'kaderisasi' => $kaderisasi,
-            'title'      => 'Kaderisasi'
+            'title'      => 'PTDI|Kaderisasi'
         ]);
     }
 
@@ -51,7 +51,7 @@ class KaderisasiController extends Controller
             'managers'            => $managers,
             'karyawanJunior'      => $karyawanJunior,
             'karyawanSenior'      => $karyawanSenior,
-            'title'               => 'Tambah Kaderisasi'
+            'title'               => 'PTDI|Tambah Kaderisasi'
         ]);
     }
 
@@ -115,7 +115,7 @@ class KaderisasiController extends Controller
             'karyawanJunior'      => $karyawanJunior,
             'karyawanSenior'      => $karyawanSenior,
             'kaderisasi'          => $kaderisasi,
-            'title'               => 'Edit Kaderisasi'
+            'title'               => 'PTDI|Edit Kaderisasi'
         ]);
     }
 

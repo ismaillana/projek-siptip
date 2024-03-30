@@ -25,4 +25,14 @@ class Karyawan extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get all of the Kaderisasi for the Kaderisasi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function kaderisasi(): HasMany
+    {
+        return $this->hasMany(Kaderisasi::class, 'id');
+    }
 }

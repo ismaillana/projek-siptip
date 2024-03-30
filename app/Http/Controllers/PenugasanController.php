@@ -19,11 +19,12 @@ class PenugasanController extends Controller
     {
         $userId = Auth::id();
 
-        $penugasan = Penugasan::get();
+        $penugasan = Penugasan::where('id_manager', $userId)
+            ->get();
 
         return view('admin.penugasan.index', [
             'penugasan' => $penugasan,
-            'title'     => 'Penugasan'
+            'title'     => 'PTDI|Penugasan'
         ]);
     }
 
@@ -32,11 +33,14 @@ class PenugasanController extends Controller
      */
     public function create()
     {
-        $kaderisasi = Kaderisasi::get();
+        $userId = Auth::id();
+
+        $kaderisasi = Kaderisasi::where('id_manager', $userId)
+            ->get();
 
         return view('admin.penugasan.tambah', [
             'kaderisasi'    => $kaderisasi,
-            'title'         => 'Tambah Kaderisasi'
+            'title'         => 'PTDI|Tambah Kaderisasi'
         ]);
     }
 
@@ -86,14 +90,17 @@ class PenugasanController extends Controller
      */
     public function edit(string $id)
     {
-        $kaderisasi = Kaderisasi::get();
+        $userId = Auth::id();
+        
+        $kaderisasi = Kaderisasi::where('id_manager', $userId)
+            ->get();
         
         $penugasan = Penugasan::findOrFail($id);
 
         return view('admin.penugasan.edit', [
             'kaderisasi'    => $kaderisasi,
             'penugasan'     => $penugasan,
-            'title'         => 'Edit Penugasan'
+            'title'         => 'PTDI|Edit Penugasan'
         ]);
     }
 

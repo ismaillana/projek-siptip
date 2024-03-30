@@ -24,7 +24,7 @@ class KaryawanController extends Controller
 
         return view('admin.karyawan.index', [
             'karyawan' => $karyawan,
-            'title'    => 'Karyawan'
+            'title'    => 'PTDI|Karyawan'
         ]);
     }
 
@@ -37,7 +37,7 @@ class KaryawanController extends Controller
     
         return view('admin.karyawan.tambah', [
             'role'      => $role,
-            'title'    => 'Tambah Karyawan'
+            'title'    => 'PTDI|Tambah Karyawan'
         ]);
     }
 
@@ -128,7 +128,7 @@ class KaryawanController extends Controller
         return view('admin.karyawan.edit', [
             'karyawan'  => $karyawan,
             'role'      => $role,
-            'title'    => 'Edit Karyawan'
+            'title'    => 'PTDI|Edit Karyawan'
         ]);
     }
 

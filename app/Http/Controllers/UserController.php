@@ -24,7 +24,7 @@ class UserController extends Controller
 
         return view('admin.user.index', [
             'users' => $users,
-            'title'    => 'Pengguna'
+            'title'    => 'PTDI|Pengguna'
         ]);
     }
 
@@ -37,7 +37,7 @@ class UserController extends Controller
     
         return view('admin.user.tambah', [
             'role'      => $role,
-            'title'    => 'Tambah Pengguna'
+            'title'    => 'PTDI|Tambah Pengguna'
         ]);
     }
 
@@ -102,7 +102,7 @@ class UserController extends Controller
             'user'      => $user,
             'role'      => $role,
             'userRoles' => $userRoles,
-            'title'    => 'Edit Pengguna'
+            'title'    => 'PTDI|Edit Pengguna'
         ]);
     }
 
