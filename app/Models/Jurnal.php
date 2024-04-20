@@ -22,7 +22,7 @@ class Jurnal extends Model
      *
      * @var array
      */
-    protected $appends = ['file_url','file_revisi_url'];
+    protected $appends = ['file_url','file_revisi_url','file_revisi_manager_url'];
 
     /**
      * Get the Penugasan that owns the Penugasan
@@ -85,6 +85,31 @@ class Jurnal extends Model
     }
 
     /**
+     * Save file_jurnal.
+     *
+     * @param  $request
+     * @return string
+     */
+    public static function saveDokumenRevisiManager($request)
+    {   
+        $filename = null;
+
+        if ($request->file_revisi_manager) {
+            $file = $request->file_revisi_manager;
+
+            $ext = $file->getClientOriginalExtension();
+
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+
+            $filename = $originalName . '-' . date('Ymd-His') . '.' . $ext;
+
+            $file->storeAs('public/file_revisi_manager/', $filename);
+        }
+
+        return $filename;
+    }
+
+    /**
      * Get the file .
      *
      * @return string
@@ -112,6 +137,20 @@ class Jurnal extends Model
         return null;
     }
 
+    /**
+     * Get the file .
+     *
+     * @return string
+     */
+    public function getFileRevisiManagerUrlAttribute()
+    {
+        if ($this->file_revisi_manager) {
+            return asset('storage/file_revisi_manager/' . $this->file_revisi_manager);
+        }
+        
+        return null;
+    }
+
     public static function deleteFile(string $id)
     {
         $jurnal = Jurnal::firstWhere('id', $id);
@@ -130,6 +169,17 @@ class Jurnal extends Model
             $path = 'public/file_revisi/' . $jurnal->file_revisi;
             if (Storage::exists($path)) {
                 Storage::delete('public/file_revisi/' . $jurnal->file_revisi);
+            }
+        }
+    }
+
+    public static function deleteFileRevisiManager(string $id)
+    {
+        $jurnal = Jurnal::firstWhere('id', $id);
+        if ($jurnal->file_revisi_manager != null) {
+            $path = 'public/file_revisi_manager/' . $jurnal->file_revisi_manager;
+            if (Storage::exists($path)) {
+                Storage::delete('public/file_revisi_manager/' . $jurnal->file_revisi_manager);
             }
         }
     }

@@ -7,12 +7,13 @@
           <a href="{{route('jurnal.index')}}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
         </div>
         <h1>
-            Tambah Data Jurnal
+            Edit Data Jurnal
         </h1>
       </div>
 
-      <form id="myForm" class="forms-sample" enctype="multipart/form-data" method="POST" 
-        action="{{route('jurnal-store', $penugasan->id)}}">
+      <form id="myForm" class="forms-sample" enctype="multipart/form-data" method="POST"
+        action="{{route('jurnal.update', $jurnal) }}">
+        @method('put')
         {{ csrf_field() }}
         <div class="section-body">
             <div class="row">
@@ -21,12 +22,38 @@
                         <h5 class="card-header">Form Jurnal</h5>
                         <div class="card-body">
                             <div class="mb-3 row">
+                                <label for="penugasan_id" class="col-md-2 col-form-label">Penugasan<sup
+                                        class="text-danger">*</sup></label>
+                                <div class="col-md-10">
+                                    <select name="penugasan_id"
+                                        class="form-control select2 @error('penugasan_id') is-invalid @enderror">
+                                        <option value="" selected="" disabled="">
+                                            Pilih Penugasan
+                                        </option>
+
+                                        @foreach ($penugasan as $item)
+                                            <option value="{{ $item->id }}"
+                                                {{ old('penugasan_id', @$jurnal->penugasan_id) == $item->id ? 'selected' : '' }}>
+                                                {{ $item->tugas }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('penugasan_id'))
+                                        <span class="text-danger">
+                                            {{ $errors->first('penugasan_id') }}
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
                                 <label for="file_jurnal" class="col-md-2 col-form-label">File Jurnal <sup
                                         class="text-danger">*</sup></label>
                                 <div class="col-md-10">
                                     <div class="input-group">
                                         <input class="dropify @error('file_jurnal') is-invalid @enderror" type="file" 
-                                            name="file_jurnal" data-height='250' data-allowed-file-extensions="pdf" data-max-file-size="5M">
+                                            name="file_jurnal" data-height='250' data-default-file="{{@$jurnal->file_url}}" data-allowed-file-extensions="pdf" data-max-file-size="5M" value="image_url">
                                     </div>
 
                                     @if ($errors->has('file_jurnal'))

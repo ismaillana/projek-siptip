@@ -31,8 +31,18 @@ class Karyawan extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function kaderisasi(): HasMany
+    public function kaderisasiJunior()
     {
-        return $this->hasMany(Kaderisasi::class, 'id');
+        return $this->hasMany(Kaderisasi::class, 'id_karyawan_junior');
+    }
+
+    /**
+     * Get all of the Kaderisasi for the Kaderisasi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function kaderisasiSenior()
+    {
+        return $this->hasMany(Kaderisasi::class, 'id_karyawan_senior');
     }
 }

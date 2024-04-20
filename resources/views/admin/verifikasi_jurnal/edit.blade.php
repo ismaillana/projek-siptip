@@ -7,19 +7,19 @@
           <a href="{{route('evaluasi.index')}}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
         </div>
         <h1>
-            Edit Data Evaluasi
+            Edit Data Verifikasi Jurnal
         </h1>
       </div>
 
       <form id="myForm" class="forms-sample" enctype="multipart/form-data" method="POST"
-        action="{{route('evaluasi-update', $penugasan->id) }}">
+        action="{{route('verifikasi-jurnal-update', $penugasan->id) }}">
         @method('put')
         {{ csrf_field() }}
         <div class="section-body">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <h5 class="card-header">Form Evaluasi</h5>
+                        <h5 class="card-header">Form Verifikasi Jurnal</h5>
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <label for="file_jurnal" class="col-md-2 col-form-label">File Jurnal <sup
@@ -47,12 +47,12 @@
                                     <select name="status_jurnal"
                                         class="form-control select2 @error('status_jurnal') is-invalid @enderror">
                                         <option selected disabled value="">Pilih Status</option>
-                                        <option value="Revisi Senior"
-                                            {{ old('status_jurnal', @$evaluasi->status_jurnal) == 'Revisi Senior' ? 'selected' : '' }}>
+                                        <option value="Revisi Manager"
+                                            {{ old('status_jurnal', @$evaluasi->status_jurnal) == 'Revisi Manager' ? 'selected' : '' }}>
                                             Revisi</option>
-                                        <option value="Review Manager"
-                                            {{ old('status_jurnal', @$evaluasi->status_jurnal) == 'Review Manager' ? 'selected' : '' }}>
-                                            Review Manager</option>
+                                        <option value="Selesai"
+                                            {{ old('status_jurnal', @$evaluasi->status_jurnal) == 'Selesai' ? 'selected' : '' }}>
+                                            Selesai</option>
                                     </select>
 
                                     @if ($errors->has('status_jurnal'))
@@ -64,17 +64,17 @@
                             </div>
 
                             <div class="mb-3 row" id="fileRevisiSection" style="display: none;">
-                                <label for="file_revisi" class="col-md-2 col-form-label">File Revisi <sup
+                                <label for="file_revisi_manager" class="col-md-2 col-form-label">File Revisi <sup
                                         class="text-danger">*</sup></label>
                                 <div class="col-md-10">
                                     <div class="input-group">
-                                        <input class="dropify @error('file_revisi') is-invalid @enderror" type="file" 
-                                            name="file_revisi" data-height='250' data-default-file="{{@$evaluasi->file_revisi_url}}" data-allowed-file-extensions="pdf" data-max-file-size="5M" value="file_revisi_url">
+                                        <input class="dropify @error('file_revisi_manager') is-invalid @enderror" type="file" 
+                                            name="file_revisi_manager" data-height='250' data-default-file="{{@$evaluasi->file_revisi_manager_url}}" data-allowed-file-extensions="pdf" data-max-file-size="5M" value="file_revisi_manager_url">
                                     </div>
 
-                                    @if ($errors->has('file_revisi'))
+                                    @if ($errors->has('file_revisi_manager'))
                                         <span class="text-danger">
-                                            {{ $errors->first('file_revisi') }}
+                                            {{ $errors->first('file_revisi_manager') }}
                                         </span>
                                     @endif
                                 </div>
@@ -165,7 +165,7 @@
             const selectedStatus = $(this).val();
 
             // Menampilkan field input file_revisi dan uraian_revisi jika status jurnal Revisi
-            if (selectedStatus === 'Revisi Senior') {
+            if (selectedStatus === 'Revisi Manager') {
             fileRevisiSection.show();
             uraianRevisiSection.show();
             } else {

@@ -4,34 +4,56 @@
     <section class="section">
       <div class="section-header">
         <div class="section-header-back">
-          <a href="{{route('jurnal.index')}}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+          <a href="{{route('soal.index')}}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
         </div>
         <h1>
-            Tambah Data Jurnal
+            Tambah Data Soal
         </h1>
       </div>
 
       <form id="myForm" class="forms-sample" enctype="multipart/form-data" method="POST" 
-        action="{{route('jurnal-store', $penugasan->id)}}">
+        action="{{route('soal.store')}}">
         {{ csrf_field() }}
         <div class="section-body">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <h5 class="card-header">Form Jurnal</h5>
+                        <h5 class="card-header">Form Soal</h5>
                         <div class="card-body">
                             <div class="mb-3 row">
-                                <label for="file_jurnal" class="col-md-2 col-form-label">File Jurnal <sup
+                                <label for="to" class="col-md-2 col-form-label">Pertanyaan Untuk<sup
                                         class="text-danger">*</sup></label>
                                 <div class="col-md-10">
-                                    <div class="input-group">
-                                        <input class="dropify @error('file_jurnal') is-invalid @enderror" type="file" 
-                                            name="file_jurnal" data-height='250' data-allowed-file-extensions="pdf" data-max-file-size="5M">
-                                    </div>
+                                    <select name="to"
+                                        class="form-control select2 @error('to') is-invalid @enderror">
+                                        <option disabled selected>Pilih Jenis Karyawan</option>
+                                        <option value="Junior"
+                                            {{ old('to', @$soal->to) == 'Junior' ? 'selected' : '' }}>
+                                                Karyawan Junior</option>
+                                        <option value="Senior"
+                                            {{ old('to', @$soal->to) == 'Senior' ? 'selected' : '' }}>
+                                                Karyawan Senior</option>
+                                    </select>
 
-                                    @if ($errors->has('file_jurnal'))
+                                    @if ($errors->has('to'))
                                         <span class="text-danger">
-                                            {{ $errors->first('file_jurnal') }}
+                                            {{ $errors->first('to') }}
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="soal" class="col-md-2 col-form-label">Pertanyaan <sup
+                                        class="text-danger">*</sup></label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control @error('soal') is-invalid @enderror"
+                                        id="soal" name="soal" placeholder="Masukan Soal"
+                                        value="{{ old('soal', @$soal->soal) }}">
+
+                                    @if ($errors->has('soal'))
+                                        <span class="text-danger">
+                                            {{ $errors->first('soal') }}
                                         </span>
                                     @endif
                                 </div>

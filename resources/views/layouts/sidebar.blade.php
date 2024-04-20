@@ -19,22 +19,23 @@
           <li class="menu-header">Kaderisasi</li>
             <li class="nav-item {{ request()->is('admin-corporate/kaderisasi*') ? 'active' : '' }}">
               <a href="{{route('kaderisasi.index')}}" class="nav-link">
-                <i class="fas fa-home"></i>
+                <i class="fas fa-users"></i>
                 <span>Kaderisasi</span></a>
             </li>
 
-          <li class="menu-header">List Jurnal Publish</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="fas fa-home"></i>
-                <span>List Jurnal Publish</span></a>
+          <li class="menu-header">Pertanyaan</li>
+            <li class="nav-item {{ request()->is('admin-corporate/soal*') ? 'active' : '' }}">
+              <a href="{{route('soal.index')}}" class="nav-link">
+                <i class="fas fa-pen-square"></i>
+                <span>Pertanyaan</span></a>
             </li>
 
-          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Documentation
-            </a>
-          </div>
+          <li class="menu-header">List Jurnal Publish</li>
+            <li class="nav-item {{ request()->is('admin-corporate/jurnal-publish*') ? 'active' : '' }}">
+              <a href="{{route('jurnal-publish.index')}}" class="nav-link">
+                <i class="fas fa-list-alt"></i>
+                <span>List Jurnal Publish</span></a>
+            </li>
         @endrole
 
         @role('admin-it')
@@ -67,12 +68,6 @@
                 </li>
               </ul>
             </li>
-            
-          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Documentation
-            </a>
-          </div>
         @endrole
 
         @role('manager')
@@ -86,22 +81,15 @@
           <li class="menu-header">Penugasan</li>
             <li class="nav-item {{ request()->is('manager/penugasan*') ? 'active' : '' }}">
               <a href="{{route('penugasan.index')}}" class="nav-link">
-                <i class="fas fa-home"></i>
+                <i class="fas fa-clipboard"></i>
                 <span>Penugasan</span></a>
             </li>
 
           <li class="menu-header">Verifikasi Jurnal</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="fas fa-home"></i>
+            <li class="nav-item {{ request()->is('manager/verifikasi*') ? 'active' : '' }}">
+              <a href="{{route('verifikasi-jurnal.index')}}" class="nav-link">
+                <i class="fas fa-file-signature"></i>
                 <span>Verifikasi Jurnal</span></a>
-            </li>
-
-          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Documentation
-            </a>
-          </div>
         @endrole
 
         @role('karyawan-senior')
@@ -115,22 +103,16 @@
           <li class="menu-header">Evaluasi</li>
             <li class="nav-item {{ request()->is('karyawan-senior/evaluasi*') ? 'active' : '' }}">
               <a href="{{route('evaluasi.index')}}" class="nav-link">
-                <i class="fas fa-home"></i>
-                <span>Jurnal</span></a>
+                <i class="fas fa-file-alt"></i>
+                <span>Evaluasi Jurnal</span></a>
             </li>
 
           <li class="menu-header">Hasil Penilaian</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="fas fa-home"></i>
+            <li class="nav-item {{ request()->is('karyawan/penilaian*') ? 'active' : '' }}">
+              <a href="{{route ('penilaian.index')}}" class="nav-link">
+                <i class="fas fa-award"></i>
                 <span>Hasil Penilaian</span></a>
-            </li>
-
-          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Documentation
-            </a>
-          </div>
+          
         @endrole
 
         @role('karyawan-junior')
@@ -144,22 +126,15 @@
           <li class="menu-header">Jurnal</li>
             <li class="nav-item {{ request()->is('karyawan-junior/jurnal*') ? 'active' : '' }}">
               <a href="{{route('jurnal.index')}}" class="nav-link">
-                <i class="fas fa-home"></i>
+                <i class="fas fa-file-alt"></i>
                 <span>Jurnal</span></a>
             </li>
 
           <li class="menu-header">Hasil Penilaian</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="fas fa-home"></i>
+                <i class="fas fa-award"></i>
                 <span>Hasil Penilaian</span></a>
-            </li>
-
-          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Documentation
-            </a>
-          </div>
         @endrole
       </ul>
     </aside>

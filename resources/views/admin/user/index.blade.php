@@ -87,10 +87,6 @@
                                     <a href="{{ route('user.edit', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-
-                                    <button value="{{ route('user.destroy', $item->id) }}" class="btn btn-sm btn-outline-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus"> 
-                                        <i class="fas fa-trash"></i>
-                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -104,46 +100,4 @@
       </div>
     </section>
   </div>  
-@endsection
-
-@section('script')
-    <script>
-        $(document).ready(function() {
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $(document).on('click', '.delete', function() {
-                let url = $(this).val();
-                console.log(url);
-                swal({
-                        title: "Apakah anda yakin?",
-                        text: "Setelah dihapus, Anda tidak dapat memulihkan Data ini lagi!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            $.ajax({
-                                type: "DELETE",
-                                url: url,
-                                dataType: 'json',
-                                success: function(response) {
-                                    swal(response.status, {
-                                            icon: "success",
-                                        })
-                                        .then((result) => {
-                                            location.reload();
-                                        });
-                                }
-                            });
-                        }
-                    })
-            });
-        });
-    </script>
 @endsection

@@ -17,11 +17,11 @@
                         Data Penugasan
                     </h4>
 
-                    <a href="{{ route('penugasan.create') }}"
+                    {{-- <a href="{{ route('penugasan.create') }}"
                         class="btn btn-outline-success btn-lg d-flex align-items-center ">
                         <i class="fa fa-plus pr-2"></i>
                         Tambah
-                    </a>
+                    </a> --}}
                 </div>
               </div>
               <div class="card-body">
@@ -34,19 +34,15 @@
                         </th>
                         
                         <th>
-                            Tugas
+                            Karyawan Senior
                         </th>
 
                         <th>
-                            Tanggal Awal
+                            Karyawan Junior
                         </th>
 
                         <th>
-                            Tanggal Akhir
-                        </th>
-
-                        <th>
-                            Status
+                            Uraian Keilmuan
                         </th>
 
                         <th style="width: 10%">
@@ -55,36 +51,32 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($penugasan as $item)
+                        @foreach ($kaderisasi as $item)
                             <tr>
                                 <td>
                                     {{$loop->iteration}}
                                 </td>
 
                                 <td>
-                                    {{$item->tugas}}
+                                    {{$item->karyawanSenior->user->name}}
                                 </td>
 
                                 <td>
-                                    {{$item->tanggal_awal}}
+                                    {{$item->karyawanJunior->user->name}}
                                 </td>
 
                                 <td>
-                                    {{$item->tanggal_akhir}}
+                                    {{$item->uraian_keilmuan}}
                                 </td>
 
                                 <td>
-                                    {{$item->status}}
-                                </td>
-
-                                <td>
-                                    <a href="{{ route('penugasan.edit', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
+                                    {{-- <a href="{{ route('penugasan.edit', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
                                         <i class="fas fa-pencil-alt"></i>
-                                    </a>
+                                    </a> --}}
 
-                                    <button value="{{ route('penugasan.destroy', $item->id) }}" class="btn btn-sm btn-outline-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus"> 
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    <a href="{{ route('penugasan-create', $item->id) }}" title="Tambah" class="btn btn-sm btn-outline-success">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -98,46 +90,4 @@
       </div>
     </section>
   </div>  
-@endsection
-
-@section('script')
-    <script>
-        $(document).ready(function() {
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $(document).on('click', '.delete', function() {
-                let url = $(this).val();
-                console.log(url);
-                swal({
-                        title: "Apakah anda yakin?",
-                        text: "Setelah dihapus, Anda tidak dapat memulihkan Data ini lagi!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            $.ajax({
-                                type: "DELETE",
-                                url: url,
-                                dataType: 'json',
-                                success: function(response) {
-                                    swal(response.status, {
-                                            icon: "success",
-                                        })
-                                        .then((result) => {
-                                            location.reload();
-                                        });
-                                }
-                            });
-                        }
-                    })
-            });
-        });
-    </script>
 @endsection

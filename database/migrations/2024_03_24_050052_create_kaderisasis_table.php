@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('kaderisasis', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_karyawan_junior');
-            $table->integer('id_karyawan_senior');
-            $table->integer('id_admin_corporate');
-            $table->integer('id_manager');
+            $table->bigInteger('id_manager')->unsigned()->nullable();
+            $table->foreign('id_manager')->references('id')->on('users');
+            $table->bigInteger('id_admin_corporate')->unsigned()->nullable();
+            $table->foreign('id_admin_corporate')->references('id')->on('users');
+            $table->bigInteger('id_karyawan_junior')->unsigned()->nullable();
+            $table->foreign('id_karyawan_junior')->references('id')->on('karyawans');
+            $table->bigInteger('id_karyawan_senior')->unsigned()->nullable();
+            $table->foreign('id_karyawan_senior')->references('id')->on('karyawans');
             $table->text('uraian_keilmuan');
             $table->timestamps();
         });

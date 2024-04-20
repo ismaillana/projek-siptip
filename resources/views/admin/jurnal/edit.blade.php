@@ -12,7 +12,7 @@
       </div>
 
       <form id="myForm" class="forms-sample" enctype="multipart/form-data" method="POST"
-        action="{{route('jurnal.update', $jurnal) }}">
+        action="{{route('jurnal-update', $penugasan->id) }}">
         @method('put')
         {{ csrf_field() }}
         <div class="section-body">
@@ -21,29 +21,69 @@
                     <div class="card">
                         <h5 class="card-header">Form Jurnal</h5>
                         <div class="card-body">
-                            <div class="mb-3 row">
-                                <label for="penugasan_id" class="col-md-2 col-form-label">Penugasan<sup
-                                        class="text-danger">*</sup></label>
-                                <div class="col-md-10">
-                                    <select name="penugasan_id"
-                                        class="form-control select2 @error('penugasan_id') is-invalid @enderror">
-                                        <option value="" selected="" disabled="">
-                                            Pilih Penugasan
-                                        </option>
-
-                                        @foreach ($penugasan as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ old('penugasan_id', @$jurnal->penugasan_id) == $item->id ? 'selected' : '' }}>
-                                                {{ $item->tugas }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-
-                                    @if ($errors->has('penugasan_id'))
-                                        <span class="text-danger">
-                                            {{ $errors->first('penugasan_id') }}
-                                        </span>
+                            <p><b style="color: #044879">Revisi Senior</b></p>
+                            <div class="row">
+                                <label for="tugas" class="col-md-2">
+                                    File Revisi
+                                </label>
+                                <label for="tugas" class="col-md-8">
+                                    @if (isset($jurnal->file_revisi))
+                                        <a href="{{ asset('storage/file_revisi/'. $jurnal->file_revisi)}}" 
+                                            download="{{$jurnal->file_revisi}}"
+                                            class="btn btn-sm btn-outline-primary" title="Download Hasil">
+                                                Unduh File Revisi
+                                        </a>
+                                    @else
+                                        Belum Ada Revisi
                                     @endif
+                                </label>
+                            </div>
+                            <hr style="margin-top: -5px;">
+                            <div class="row">
+                                <label for="tugas" class="col-md-2">
+                                    Uraian Revisi
+                                </label>
+                                <label for="tugas" class="col-md-8">
+                                    @if (isset($jurnal->uraian_revisi))
+                                        {{ $jurnal->uraian_revisi }}
+                                    @else
+                                        Belum Ada Revisi
+                                    @endif
+                                </label>
+                            </div>
+                            <hr style="margin-top: -5px;">
+                            <p><b style="color: #044879">Revisi Manager</b></p>
+                            <div class="row">
+                                <label for="tugas" class="col-md-2">
+                                    File Revisi
+                                </label>
+                                <label for="tugas" class="col-md-8">
+                                    @if (isset($jurnal->file_revisi_manager))
+                                        {{ $jurnal->file_revisi_manager }}
+                                    @else
+                                        Belum Ada Revisi
+                                    @endif
+                                </label>
+                            </div>
+                            <hr style="margin-top: -5px;">
+                            <div class="row">
+                                <label for="tugas" class="col-md-2">
+                                    Uraian Revisi
+                                </label>
+                                <label for="tugas" class="col-md-8">
+                                    @if (isset($jurnal->uraian_revisi_manager))
+                                        {{ $jurnal->uraian_revisi_manager }}
+                                    @else
+                                        Belum Ada Revisi
+                                    @endif
+                                </label>
+                            </div>
+                            <hr style="margin-top: -5px;">
+
+                            <div class="mb-3 row">
+                                <label for="status_jurnal" class="col-md-2 col-form-label">Status Jurnal</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" value="{{ $jurnal->status_jurnal }}" disabled>
                                 </div>
                             </div>
 

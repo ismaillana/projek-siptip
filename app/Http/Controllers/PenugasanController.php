@@ -18,12 +18,14 @@ class PenugasanController extends Controller
     public function index()
     {
         $userId = Auth::id();
-
-        $penugasan = Penugasan::where('id_manager', $userId)
-            ->get();
+        
+        $kaderisasi = Kaderisasi::where('id_manager', $userId)
+        ->with(['karyawanJunior', 'karyawanSenior']) // Eager load relasi
+        ->get();
+        // dd($kaderisasi);
 
         return view('admin.penugasan.index', [
-            'penugasan' => $penugasan,
+            'kaderisasi' => $kaderisasi,
             'title'     => 'PTDI|Penugasan'
         ]);
     }
@@ -31,12 +33,11 @@ class PenugasanController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id)
     {
         $userId = Auth::id();
 
-        $kaderisasi = Kaderisasi::where('id_manager', $userId)
-            ->get();
+        $kaderisasi = Kaderisasi::findOrFail($id);
 
         return view('admin.penugasan.tambah', [
             'kaderisasi'    => $kaderisasi,
@@ -47,18 +48,15 @@ class PenugasanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
         $userId = Auth::id();
-
         $request->validate([
-            'kaderisasi_id'     => 'required',
             'tugas'             => 'required',
             'tanggal_awal'      => 'required',
             'tanggal_akhir'     => 'required',
             'uraian_penugasan'  => 'required',
         ], [
-            'kaderisasi_id.required'    => 'Pilih Karyawan Junior',
             'tugas.required'            => 'Pilih Karyawan Senior',
             'tanggal_awal.required'     => 'Pilih Manager',
             'tanggal_akhir.require'     => 'Pilih Manager',
@@ -66,7 +64,7 @@ class PenugasanController extends Controller
         ]);
 
         $penugasan = Penugasan::create([
-            'kaderisasi_id'         => $request->kaderisasi_id,
+            'kaderisasi_id'         => $id,
             'tugas'                 => $request->tugas,
             'tanggal_awal'          => $request->tanggal_awal,
             'tanggal_akhir'         => $request->tanggal_akhir,

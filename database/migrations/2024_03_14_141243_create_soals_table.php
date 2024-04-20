@@ -11,16 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penilaians', function (Blueprint $table) {
+        Schema::create('soals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kaderisasi_id')
-                ->nullable()
-                ->constrained();
             $table->string('soal');
-            $table->integer('id_dinilai');
-            $table->integer('id_penilai');
-            $table->string('nilai_huruf');
-            $table->integer('nilai_angka');
+            $table->enum('to', ['Junior', 'Senior'])->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penilaians');
+        Schema::dropIfExists('soals');
     }
 };

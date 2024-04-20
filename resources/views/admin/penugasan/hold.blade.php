@@ -1,5 +1,11 @@
 @extends('layouts.base')
 @section('content')
+<style>
+    .list-group-item .name-span {
+        margin-right: 20px; /* Sesuaikan jarak antara span yang pertama dengan yang berikutnya di sini */
+    }
+</style>
+
 <div class="main-content">
     <section class="section">
       <div class="section-header">
@@ -12,7 +18,7 @@
       </div>
 
       <form id="myForm" class="forms-sample" enctype="multipart/form-data" method="POST" 
-        action="{{route('penugasan-store', $kaderisasi->id)}}">
+        action="{{route('penugasan.store')}}">
         {{ csrf_field() }}
         <div class="section-body">
             <div class="row">
@@ -21,61 +27,42 @@
                         <h5 class="card-header">Penugasan</h5>
                         <div class="card-body">
                             <ul class="list-group-item mb-3">
-                                <p><b style="color: #044879">Giver (Coach)</b></p>
-                                <div class="row">
-                                    <label for="tugas" class="col-md-2">
-                                        NIK / Organisasi / Nama
-                                    </label>
-                                    <label for="tugas" class="col-md-8">
-                                        <strong>{{$kaderisasi->karyawanSenior->nik}} / {{$kaderisasi->karyawanSenior->organisasi}} / {{$kaderisasi->karyawanSenior->user->name}}</strong>
-                                    </label>
-                                </div>
-                                <hr style="margin-top: -5px;">
-                                <div class="row">
-                                    <label for="tugas" class="col-md-2">
-                                        Job Code / Title
-                                    </label>
-                                    <label for="tugas" class="col-md-8">
-                                        <strong>{{$kaderisasi->karyawanSenior->kode_pekerjaan}} / {{$kaderisasi->karyawanSenior->judul_pekerjaan}}</strong>
-                                    </label>
-                                </div>
-                                <hr style="margin-top: -5px;">
-                                <div class="row">
-                                    <label for="tugas" class="col-md-2 col-form-label">
-                                        Uraian Keilmuan
-                                    </label>
-                                    <div class="col-md-12">
-                                        <textarea class="form-control" style="height: 100px">
-                                            {{$kaderisasi->uraian_keilmuan }}
-                                        </textarea>
-                                    </div>
-                                </div>
+                                <p>Giver (Coach)</p>
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item">
+                                        <span class="name-span">NIK / Organisasi / Nama</span>
+                                        <strong><span>{{$kaderisasi->karyawanSenior->nik}} / {{$kaderisasi->karyawanSenior->organisasi}} / {{$kaderisasi->karyawanSenior->user->name}}</span></strong>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="name-span">Job Code / Title</span>
+                                        <strong><span>{{$kaderisasi->karyawanSenior->kode_pekerjaan}} / / {{$kaderisasi->karyawanSenior->judul_pekerjaan}}</span></strong>
+                                    </li>
+                                    <li class="list-group-item">Uraian Keilmuan :</li>
+                                    <li class="list-group-item">
+                                        <strong>{{$kaderisasi->uraian_keilmuan}}</strong>
+                                    </li>
+                                </ul>
 
-                                <p style="margin-top: 20px"><b style="color: #044879">Receiver (Successor)</b></p>
-                                <div class="row">
-                                    <label for="tugas" class="col-md-2">
-                                        NIK / Organisasi / Nama
-                                    </label>
-                                    <label for="tugas" class="col-md-8">
-                                        <strong>{{$kaderisasi->karyawanJunior->nik}} / {{$kaderisasi->karyawanJunior->organisasi}} / {{$kaderisasi->karyawanJunior->user->name}}</strong>
-                                    </label>
-                                </div>
-                                <hr style="margin-top: -5px;">
-                                <div class="row">
-                                    <label for="tugas" class="col-md-2">
-                                        Job Code / Title
-                                    </label>
-                                    <label for="tugas" class="col-md-8">
-                                        <strong>{{$kaderisasi->karyawanJunior->kode_pekerjaan}} / {{$kaderisasi->karyawanJunior->judul_pekerjaan}}</strong>
-                                    </label>
-                                </div>
-                                <hr style="margin-top: -5px;">
-
-                                <p style="margin-top: 20px"><b style="color: #044879">Data Penugasan</b></p>
-                                <div class="mb-3 row">
-                                    <label for="tanggal_awal" class="col-md-2 col-form-label">Tanggal Awal <sup
+                                <p style="margin-top: 20px">Receiver (Successor)</p>
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item">
+                                        <span class="name-span">NIK / Organisasi / Nama</span>
+                                        <strong><span>{{$kaderisasi->karyawanJunior->nik}} / {{$kaderisasi->karyawanJunior->organisasi}} / {{$kaderisasi->karyawanJunior->user->name}}</span></strong>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="name-span">Job Code / Title</span>
+                                        <strong><span>{{$kaderisasi->karyawanJunior->kode_pekerjaan}} / {{$kaderisasi->karyawanJunior->judul_pekerjaan}}</span></strong>
+                                    </li>
+                                    <li class="list-group-item">Uraian Keilmuan :</li>
+                                    <li class="list-group-item">
+                                        <strong>{{$kaderisasi->uraian_keilmuan}}</strong>
+                                    </li>
+                                </ul>
+    
+                                <div class="row align-items-center mb-3">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="tanggal_awal" class="col-form-label">Tanggal Awal <sup
                                             class="text-danger">*</sup></label>
-                                    <div class="col-md-4">
                                         <input type="date" class="form-control @error('tanggal_awal') is-invalid @enderror"
                                             id="tanggal_awal" name="tanggal_awal" placeholder="Masukan Tanggal Awal"
                                             value="{{ old('tanggal_awal', @$penugasan->tanggal_awal) }}">
@@ -86,14 +73,14 @@
                                             </span>
                                         @endif
                                     </div>
-
-                                    <label for="tanggal_akhir" class="col-md-2 col-form-label">Tanggal Akhir <sup
-                                        class="text-danger">*</sup></label>
-                                    <div class="col-md-4">
+    
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="tanggal_akhir" class="col-form-label">Tanggal Akhir <sup
+                                            class="text-danger">*</sup></label>
                                         <input type="date" class="form-control @error('tanggal_akhir') is-invalid @enderror"
                                             id="tanggal_akhir" name="tanggal_akhir" placeholder="Masukan Tanggal Akhir"
                                             value="{{ old('tanggal_akhir', @$penugasan->tanggal_akhir) }}">
-
+    
                                         @if ($errors->has('tanggal_akhir'))
                                             <span class="text-danger">
                                                 {{ $errors->first('tanggal_akhir') }}
@@ -117,8 +104,8 @@
                                         @endif
                                     </div>
                                 </div>
-
-                                <div class="row">
+    
+                                <div class="mb-3 row">
                                     <label for="uraian_penugasan" class="col-md-2 col-form-label">Uraian Penugasan <sup
                                             class="text-danger">*</sup></label>
                                     <div class="col-md-10">
@@ -135,8 +122,8 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <div class="col-sm-12 ">
-                                        <button type="submit" class="btn btn-primary float-right" id="btnSubmit">
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-primary" id="btnSubmit">
                                             Simpan
                                             <span class="spinner-border ml-2 d-none" id="loader"
                                                 style="width: 1rem; height: 1rem;" role="status">

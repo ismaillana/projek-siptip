@@ -4,7 +4,7 @@
 <div class="main-content">
     <section class="section">
       <div class="section-header">
-        <h1>Tabel Data Evaluasi</h1>
+        <h1>Tabel Data Verifikasi Jurnal</h1>
       </div>
 
       <div class="section-body">
@@ -14,8 +14,14 @@
               <div class="card-header">
                 <div class="d-flex justify-content-between w-100">
                     <h4>
-                        Data Evaluasi
+                        Data Verifikasi Jurnal
                     </h4>
+
+                    {{-- <a href="{{ route('jurnal.create') }}"
+                        class="btn btn-outline-success btn-lg d-flex align-items-center ">
+                        <i class="fa fa-plus pr-2"></i>
+                        Tambah
+                    </a> --}}
                 </div>
               </div>
               <div class="card-body">
@@ -27,6 +33,10 @@
                             #
                         </th>
                         
+                        <th>
+                            Karyawan Senior
+                        </th>
+
                         <th>
                             Karyawan Junior
                         </th>
@@ -56,6 +66,10 @@
                                 </td>
 
                                 <td>
+                                    {{@$item->kaderisasi->karyawanSenior->user->name}}
+                                </td>
+
+                                <td>
                                     {{@$item->kaderisasi->karyawanJunior->user->name}}
                                 </td>
 
@@ -82,19 +96,20 @@
                                 </td>
 
                                 <td>
-                                    @if ($item->status_jurnal == 'Belum Dikerjakan')
-                                        Belum Ada Aksi
-                                    @elseif ($item->status_jurnal == 'Selesai' || $item->status_jurnal == 'Review Manager')
-                                        <button type="button" class="btn btn-sm btn-outline-warning" title="Button Disabled" disabled>
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </button>
-                                    @elseif ($item->status_jurnal != 'Belum Dikerjakan')
-                                        <a href="{{ route('evaluasi-edit', $item->id) }}" title="Evaluasi" class="btn btn-sm btn-outline-warning">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </a>
-                                    @else
-                                        Belum ada jurnal
-                                    @endif
+                                  @if ($item->status_jurnal == 'Selesai')
+                                    <button type="button" class="btn btn-sm btn-outline-warning" title="Button Disabled" disabled>
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
+                                  @else
+                                    <a href="{{ route('verifikasi-jurnal-edit', $item->id) }}" title="Unggah Jurnal" class="btn btn-sm btn-outline-warning">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                  @endif
+
+
+                                    {{-- <a href="{{ route('nilai-senior', $item->kaderisasi_id) }}" title="Penilaian" class="btn btn-sm btn-outline-success">
+                                        <i class="fas fa-thumbtack"></i>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

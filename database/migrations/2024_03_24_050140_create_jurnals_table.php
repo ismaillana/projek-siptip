@@ -18,10 +18,12 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->string('file_jurnal');
-            $table->string('file_revisi');
-            $table->text('uraian_revisi');
-            $table->enum('status_jurnal', ['Belum Dikerjakan', 'Review', 'Revisi', 'Selesai'])->default('Belum Dikerjakan')->nullable();
+            $table->string('file_jurnal')->nullable();
+            $table->string('file_revisi')->nullable();
+            $table->text('uraian_revisi')->nullable();
+            $table->string('file_revisi_manager')->nullable();
+            $table->text('uraian_revisi_manager')->nullable();
+            $table->enum('status_jurnal', ['Belum Dikerjakan', 'Review', 'Review Manager', 'Revisi Senior', 'Revisi Manager', 'Selesai'])->default('Belum Dikerjakan')->nullable();
             $table->timestamps();
         });
     }

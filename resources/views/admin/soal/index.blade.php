@@ -4,7 +4,7 @@
 <div class="main-content">
     <section class="section">
       <div class="section-header">
-        <h1>Tabel Data Karyawan</h1>
+        <h1>Tabel Data Soal</h1>
       </div>
 
       <div class="section-body">
@@ -14,10 +14,10 @@
               <div class="card-header">
                 <div class="d-flex justify-content-between w-100">
                     <h4>
-                        Data Karyawan
+                        Data Soal
                     </h4>
 
-                    <a href="{{ route('karyawan.create') }}"
+                    <a href="{{ route('soal.create') }}"
                         class="btn btn-outline-success btn-lg d-flex align-items-center ">
                         <i class="fa fa-plus pr-2"></i>
                         Tambah
@@ -34,15 +34,11 @@
                         </th>
                         
                         <th>
-                            Nama
+                            Soal
                         </th>
 
                         <th>
-                            Email
-                        </th>
-
-                        <th>
-                            Status
+                            Pertanyaan Untuk
                         </th>
 
                         <th style="width: 10%">
@@ -51,30 +47,22 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($karyawan as $item)
+                        @foreach ($soal as $item)
                             <tr>
                                 <td>
                                     {{$loop->iteration}}
                                 </td>
 
                                 <td>
-                                    {{$item->nama_lengkap}}
+                                    {{$item->soal}}
                                 </td>
 
                                 <td>
-                                    {{@$item->user->email}}
+                                    {{$item->to}}
                                 </td>
 
                                 <td>
-                                    @if ($item->status == 'Senior')
-                                        <div class="badge badge-primary">Karyawan Senior</div>
-                                    @elseif ($item->status == 'Junior')
-                                        <div class="badge badge-primary">Karyawan Junior</div>
-                                    @endif
-                                </td>
-
-                                <td>
-                                    <a href="{{ route('karyawan.edit', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
+                                    <a href="{{ route('soal.edit', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
                                 </td>

@@ -41,8 +41,38 @@ class Kaderisasi extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function karyawan()
+    public function manager()
     {
-        return $this->belongsTo(Karyawan::class, 'id_karyawan_junior', 'id_karyawan_senior');
+        return $this->belongsTo(User::class, 'id_manager');
+    }
+
+    /**
+     * Get the Karyawan that owns the Karyawan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function adminCor()
+    {
+        return $this->belongsTo(User::class, 'id_admin_corporate');
+    }
+
+    /**
+     * Get the Karyawan that owns the Karyawan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function karyawanJunior()
+    {
+        return $this->belongsTo(Karyawan::class, 'id_karyawan_junior');
+    }
+
+    /**
+     * Get the Karyawan that owns the Karyawan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function karyawanSenior()
+    {
+        return $this->belongsTo(Karyawan::class, 'id_karyawan_senior');
     }
 }

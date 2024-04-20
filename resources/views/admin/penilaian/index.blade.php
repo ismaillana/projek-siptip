@@ -4,7 +4,7 @@
 <div class="main-content">
     <section class="section">
       <div class="section-header">
-        <h1>Tabel Data Karyawan</h1>
+        <h1>Tabel Data Hasil Penilaian</h1>
       </div>
 
       <div class="section-body">
@@ -14,10 +14,10 @@
               <div class="card-header">
                 <div class="d-flex justify-content-between w-100">
                     <h4>
-                        Data Karyawan
+                        Data Hasil Penilaian
                     </h4>
 
-                    <a href="{{ route('karyawan.create') }}"
+                    <a href="{{ route('jurnal.create') }}"
                         class="btn btn-outline-success btn-lg d-flex align-items-center ">
                         <i class="fa fa-plus pr-2"></i>
                         Tambah
@@ -34,15 +34,15 @@
                         </th>
                         
                         <th>
-                            Nama
+                            Tugas
                         </th>
 
                         <th>
-                            Email
+                            Jurnal
                         </th>
 
                         <th>
-                            Status
+                            Status Hasil Penilaian
                         </th>
 
                         <th style="width: 10%">
@@ -51,30 +51,35 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($karyawan as $item)
+                        @foreach ($jurnal as $item)
                             <tr>
                                 <td>
                                     {{$loop->iteration}}
                                 </td>
 
                                 <td>
-                                    {{$item->nama_lengkap}}
+                                    {{$item->tugas}}
                                 </td>
 
                                 <td>
-                                    {{@$item->user->email}}
-                                </td>
-
-                                <td>
-                                    @if ($item->status == 'Senior')
-                                        <div class="badge badge-primary">Karyawan Senior</div>
-                                    @elseif ($item->status == 'Junior')
-                                        <div class="badge badge-primary">Karyawan Junior</div>
+                                    @if ($item->file_jurnal !== null )
+                                        <a href="{{ asset('storage/file_jurnal/'. $item->file_jurnal)}}" 
+                                        download="{{$item->file_jurnal}}"
+                                        class="btn btn-sm btn-outline-primary" title="Download Hasil">
+                                            {{-- <i class="fas fa-download"> --}}
+                                            Unduh File
+                                        </a>
+                                    @else
+                                        Belum Ada Hasil
                                     @endif
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('karyawan.edit', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
+                                    {{$item->status_jurnal}}
+                                </td>
+
+                                <td>
+                                    <a href="{{ route('penilaian.create', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
                                 </td>
@@ -89,5 +94,5 @@
         </div>
       </div>
     </section>
-  </div>  
+</div> 
 @endsection

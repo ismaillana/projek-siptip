@@ -4,7 +4,7 @@
 <div class="main-content">
     <section class="section">
       <div class="section-header">
-        <h1>Tabel Data Karyawan</h1>
+        <h1>Tabel Data Jurnal Publish</h1>
       </div>
 
       <div class="section-body">
@@ -14,14 +14,8 @@
               <div class="card-header">
                 <div class="d-flex justify-content-between w-100">
                     <h4>
-                        Data Karyawan
+                        Data Jurnal Publish
                     </h4>
-
-                    <a href="{{ route('karyawan.create') }}"
-                        class="btn btn-outline-success btn-lg d-flex align-items-center ">
-                        <i class="fa fa-plus pr-2"></i>
-                        Tambah
-                    </a>
                 </div>
               </div>
               <div class="card-body">
@@ -34,49 +28,61 @@
                         </th>
                         
                         <th>
-                            Nama
+                            Karyawan Senior
                         </th>
 
                         <th>
-                            Email
+                            Karyawan Junior
                         </th>
 
                         <th>
-                            Status
+                            Periode
                         </th>
 
-                        <th style="width: 10%">
-                            Aksi
+                        <th>
+                            Jurnal
+                        </th>
+
+                        <th>
+                            Status Jurnal
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($karyawan as $item)
+                        @foreach ($jurnal as $item)
                             <tr>
                                 <td>
                                     {{$loop->iteration}}
                                 </td>
 
                                 <td>
-                                    {{$item->nama_lengkap}}
+                                    {{@$item->jurnal->penugasan->kaderisasi->karyawanSenior->user->name}}
                                 </td>
 
                                 <td>
-                                    {{@$item->user->email}}
+                                    {{@$item->jurnal->penugasan->kaderisasi->karyawanJunior->user->name}}
                                 </td>
 
                                 <td>
-                                    @if ($item->status == 'Senior')
-                                        <div class="badge badge-primary">Karyawan Senior</div>
-                                    @elseif ($item->status == 'Junior')
-                                        <div class="badge badge-primary">Karyawan Junior</div>
+                                    {{@$item->jurnal->penugasan->tanggal_awal}} - {{@$item->jurnal->penugasan->tanggal_akhir}}
+                                </td>
+
+                                <td>
+                                    @if (@$item->jurnal->file_jurnal !== null )
+                                        <a href="{{ asset('storage/file_jurnal/'. @$item->jurnal->file_jurnal)}}" download="{{@$item->jurnal->file_jurnal}}" title="Download Hasil" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                    @else
+                                        Belum Ada Jurnal
                                     @endif
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('karyawan.edit', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
+                                    @if ($item->jurnal->status_jurnal)
+                                        {{$item->jurnal->status_jurnal}}
+                                    @else
+                                        Belum ada jurnal
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
