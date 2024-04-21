@@ -61,7 +61,9 @@
                                                 <td>{{$item->nilai_huruf}}</td>
                                             </tr>
                                         @empty
-                                            Belum Ada Penilaian
+                                            <tr>
+                                                <td colspan="4">Belum Ada Penilaian</td>
+                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
@@ -113,7 +115,9 @@
                                                 <td>{{$item->nilai_huruf}}</td>
                                             </tr>
                                         @empty
-                                            Belum Ada Penilaian
+                                            <tr>
+                                                <td colspan="4">Belum Ada Penilaian</td>
+                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
