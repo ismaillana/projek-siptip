@@ -19,8 +19,10 @@ class PenugasanController extends Controller
     {
         $userId = Auth::id();
         
-        $kaderisasi = Kaderisasi::where('id_manager', $userId)
+        $kaderisasi = Kaderisasi::where('kaderisasis.id_manager', $userId)
         ->with(['karyawanJunior', 'karyawanSenior']) // Eager load relasi
+        ->leftJoin('penugasans', 'kaderisasis.id', '=', 'penugasans.kaderisasi_id')
+        ->select('kaderisasis.*', 'penugasans.tugas')
         ->get();
         // dd($kaderisasi);
 
@@ -39,8 +41,11 @@ class PenugasanController extends Controller
 
         $kaderisasi = Kaderisasi::findOrFail($id);
 
+        $penugasan = Penugasan::where('kaderisasi_id', $id)->first();
+
         return view('admin.penugasan.tambah', [
             'kaderisasi'    => $kaderisasi,
+            'penugasan'     => $penugasan,
             'title'         => 'PTDI|Tambah Kaderisasi'
         ]);
     }
@@ -63,16 +68,28 @@ class PenugasanController extends Controller
             'uraian_penugasan.required' => 'Uraian Keilmuan Harus Diisi',
         ]);
 
-        $penugasan = Penugasan::create([
+        $data = [
             'kaderisasi_id'         => $id,
             'tugas'                 => $request->tugas,
             'tanggal_awal'          => $request->tanggal_awal,
             'tanggal_akhir'         => $request->tanggal_akhir,
             'id_manager'            => $userId,
             'uraian_penugasan'      => $request->uraian_penugasan,
-        ]);
+        ];
+    
+        $penugasan = Penugasan::where('kaderisasi_id', $id)->first();
+    
+        if ($penugasan) {
+            $penugasan->update($data);
 
-        return redirect()->route('penugasan.index')->with('success', 'Data Berhasil Ditambah');
+            return redirect()->route('penugasan.index')->with('success', 'Data Berhasil Diubah');
+        } else {
+            Penugasan::create($data);
+
+            return redirect()->route('penugasan.index')->with('success', 'Data Berhasil Ditambah');
+        }
+
+        
     }
 
     /**

@@ -51,12 +51,13 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn btn-primary" id="btnSubmit">Simpan<span class="spinner-border ml-2 d-none" id="loader" style="width: 1rem; height: 1rem;" role="status"><span class="sr-only">Loading...</span></span></button>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-primary float-right" id="btnSubmit">Simpan<span class="spinner-border ml-2 d-none" id="loader" style="width: 1rem; height: 1rem;" role="status"><span class="sr-only">Loading...</span></span></button>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>

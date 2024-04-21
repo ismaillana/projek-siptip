@@ -45,6 +45,10 @@
                             Uraian Keilmuan
                         </th>
 
+                        <th>
+                            Tugas
+                        </th>
+
                         <th style="width: 10%">
                             Aksi
                         </th>
@@ -70,11 +74,19 @@
                                 </td>
 
                                 <td>
+                                    @if ($item->tugas)
+                                        {{$item->tugas}}
+                                    @else
+                                        Belum ada Penugasan
+                                    @endif
+                                </td>
+
+                                <td>
                                     {{-- <a href="{{ route('penugasan.edit', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a> --}}
 
-                                    <a href="{{ route('penugasan-create', $item->id) }}" title="Tambah" class="btn btn-sm btn-outline-success">
+                                    <a href="{{ route('penugasan-create', $item->id) }}" title="Tambah / Update Data" class="btn btn-sm btn-outline-success">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </td>

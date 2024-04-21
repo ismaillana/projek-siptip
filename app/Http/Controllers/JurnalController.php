@@ -153,7 +153,7 @@ class JurnalController extends Controller
     public function nilaiSenior(string $id)
     {
         $kaderisasi = Kaderisasi::findOrFail($id);
-        $soal = Soal::where('status_soal', 'Junior ke Senior')->get();
+        $soal = Soal::where('to', 'Junior')->get();
 
         return view('admin.penilaian.tambah', [
             'kaderisasi'   => $kaderisasi,

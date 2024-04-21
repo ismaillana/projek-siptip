@@ -88,13 +88,27 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('jurnal-create', $item->id) }}" title="Unggah Jurnal" class="btn btn-sm btn-outline-warning">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
-
-                                    {{-- <a href="{{ route('nilai-senior', $item->kaderisasi_id) }}" title="Penilaian" class="btn btn-sm btn-outline-success">
-                                        <i class="fas fa-thumbtack"></i>
-                                    </a> --}}
+                                  @if ($item->status_jurnal == 'Selesai')
+                                      @php
+                                          $penilaian = \App\Models\Penilaian::where('kaderisasi_id', $item->kaderisasi_id)
+                                              ->where('id_penilai', $item->kaderisasi->karyawanJunior->id)
+                                              ->first();
+                                      @endphp
+                                  
+                                      @if (!$penilaian)
+                                          <a href="{{ route('nilai-senior', $item->kaderisasi_id) }}" title="Penilaian" class="btn btn-sm btn-outline-success">
+                                              <i class="fas fa-thumbtack"></i>
+                                          </a>
+                                      @endif
+                                  
+                                      <a href="{{ route('jurnal-create', $item->id) }}" title="Unggah Jurnal" class="btn btn-sm btn-outline-warning">
+                                          <i class="fas fa-pencil-alt"></i>
+                                      </a>
+                                  @else
+                                      <a href="{{ route('jurnal-create', $item->id) }}" title="Unggah Jurnal" class="btn btn-sm btn-outline-warning">
+                                          <i class="fas fa-pencil-alt"></i>
+                                      </a>
+                                  @endif
                                 </td>
                             </tr>
                         @endforeach

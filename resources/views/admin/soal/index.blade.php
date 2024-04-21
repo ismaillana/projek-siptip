@@ -33,7 +33,7 @@
                             #
                         </th>
                         
-                        <th>
+                        <th  style="width: 70%">
                             Soal
                         </th>
 
@@ -41,7 +41,7 @@
                             Pertanyaan Untuk
                         </th>
 
-                        <th style="width: 10%">
+                        <th>
                             Aksi
                         </th>
                       </tr>

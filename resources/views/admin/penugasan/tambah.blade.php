@@ -21,7 +21,7 @@
                         <h5 class="card-header">Penugasan</h5>
                         <div class="card-body">
                             <ul class="list-group-item mb-3">
-                                <p><b style="color: #044879">Giver (Coach)</b></p>
+                                <p><b style="color: #044879"><i class="fas fa-chalkboard-teacher"></i> Giver (Coach)</b></p>
                                 <div class="row">
                                     <label for="tugas" class="col-md-2">
                                         NIK / Organisasi / Nama
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
 
-                                <p style="margin-top: 20px"><b style="color: #044879">Receiver (Successor)</b></p>
+                                <p style="margin-top: 20px"><b style="color: #044879"><i class="fas fa-user-check"></i><i class=""></i> (Successor)</b></p>
                                 <div class="row">
                                     <label for="tugas" class="col-md-2">
                                         NIK / Organisasi / Nama
