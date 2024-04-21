@@ -15,4 +15,14 @@ class Penilaian extends Model
      * @var array<int, string>
      */
     protected $guarded = ['id'];
+
+    /**
+     * Get the kaderisasi that owns the kaderisasi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function kaderisasi()
+    {
+        return $this->belongsTo(Kaderisasi::class);
+    }
 }

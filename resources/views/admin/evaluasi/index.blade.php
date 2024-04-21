@@ -84,11 +84,26 @@
                                 <td>
                                     @if ($item->status_jurnal == 'Belum Dikerjakan')
                                         Belum Ada Aksi
-                                    @elseif ($item->status_jurnal == 'Selesai' || $item->status_jurnal == 'Review Manager')
+                                    @elseif ($item->status_jurnal == 'Review Manager')
                                         <button type="button" class="btn btn-sm btn-outline-warning" title="Button Disabled" disabled>
                                             <i class="fas fa-pencil-alt"></i>
                                         </button>
-                                    @elseif ($item->status_jurnal != 'Belum Dikerjakan')
+                                    @elseif($item->status_jurnal == 'Selesai')
+                                      @php
+                                          $penilaian = \App\Models\Penilaian::where('kaderisasi_id', $item->kaderisasi_id)
+                                              ->where('id_penilai', $item->kaderisasi->karyawanSenior->id)
+                                              ->first();
+                                      @endphp
+                                  
+                                        @if (!$penilaian)
+                                            <a href="{{ route('nilai-junior', $item->kaderisasi_id) }}" title="Penilaian" class="btn btn-sm btn-outline-success">
+                                                <i class="fas fa-thumbtack"></i>
+                                            </a>
+                                        @endif
+                                        <button type="button" class="btn btn-sm btn-outline-warning" title="Button Disabled" disabled>
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                    @elseif ($item->status_jurnal == 'Revisi Senior' || $item->status_jurnal == 'Review')
                                         <a href="{{ route('evaluasi-edit', $item->id) }}" title="Evaluasi" class="btn btn-sm btn-outline-warning">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>

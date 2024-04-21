@@ -75,4 +75,14 @@ class Kaderisasi extends Model
     {
         return $this->belongsTo(Karyawan::class, 'id_karyawan_senior');
     }
+
+    /**
+     * Get all of the penilaian for the penilaian
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function penilaian(): HasMany
+    {
+        return $this->hasMany(Penilaian::class);
+    }
 }

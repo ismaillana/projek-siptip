@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\Penugasan;
 use App\Models\Kaderisasi;
 use App\Models\Jurnal;
+use App\Models\Soal;
+use App\Models\Penilaian;
 
 class EvaluasiController extends Controller
 {
@@ -168,6 +170,59 @@ class EvaluasiController extends Controller
         Penugasan::find($id)->update(['status' => $status]);
 
         return redirect()->route('evaluasi.index')->with('success', 'Data Berhasil Diubah');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function nilaiJunior(string $id)
+    {
+        $kaderisasi = Kaderisasi::findOrFail($id);
+        $soal = Soal::where('to', 'Senior')->get();
+
+        return view('admin.penilaian.tambah_senior', [
+            'kaderisasi'   => $kaderisasi,
+            'soal'         => $soal,
+            'title'        => 'PTDI|Tambah Penilaian Untuk Junior'
+        ]);
+    }
+
+    public function nilaiJuniorStore(Request $request, $id)
+    {
+        // Validasi data yang diterima dari form
+        $request->validate([
+            'nilai_angka' => 'required|array', // Nilai harus berupa array
+            'nilai_angka.*' => 'required|in:1,2,3,4', // Nilai harus antara 1-4
+        ]);
+
+        // Ambil ID karyawan junior
+        $userId = Auth::id();
+        $kaderisasi = Kaderisasi::findOrFail($id);
+        $id_karyawan_senior = $kaderisasi->id_karyawan_senior;
+        $id_karyawan_junior = $kaderisasi->id_karyawan_junior;
+
+        // Array untuk mengonversi nilai angka ke nilai huruf
+        $nilai_huruf_map = [
+            '1' => 'Kurang Sekali',
+            '2' => 'Kurang',
+            '3' => 'Baik',
+            '4' => 'Baik Sekali',
+        ];
+
+        // Looping untuk menyimpan data penilaian
+        foreach ($request->nilai_angka as $key => $nilai_angka) {
+            Penilaian::create([
+                'kaderisasi_id' => $kaderisasi->id,
+                'soal' => $request->soal[$key], // Ambil teks soal dari form
+                'nilai_angka' => $nilai_angka,
+                'nilai_huruf' => $nilai_huruf_map[$nilai_angka], // Konversi nilai angka ke nilai huruf
+                'id_penilai' => $id_karyawan_senior,
+                'id_dinilai' => $id_karyawan_junior,
+            ]);
+        }
+
+
+        return redirect()->route('evaluasi.index')->with('success', 'Data penilaian berhasil disimpan.');
     }
 
 

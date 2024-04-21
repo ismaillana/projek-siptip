@@ -10,6 +10,7 @@ use App\Http\Controllers\PenugasanController;
 use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\EvaluasiController;
 use App\Http\Controllers\PenilaianController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\SoalController;
 
 /*
@@ -30,6 +31,19 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+
+Route::group(
+    [
+        'middleware'    => ['role:admin-corporate|admin-it|manager|karyawan-junior|karyawan-senior'],
+        'prefix'        => 'update-akun'
+    ],
+    function () {
+        Route::get('profil', [ProfilController::class, 'index'])->name('profil');
+        Route::post('update-profil/{update}', [ProfilController::class, 'updateProfil'])->name('update-profil');
+        Route::get('password', [ProfilController::class, 'password'])->name('password');
+        Route::post('update-password/{update}', [ProfilController::class, 'updatePassword'])->name('update-password');
+});
 
 Route::group(
     [
@@ -89,6 +103,8 @@ Route::group(
         Route::resource('evaluasi', App\Http\Controllers\EvaluasiController::class);
         Route::get('evaluasi-edit/{id}', [EvaluasiController::class, 'edit'])->name('evaluasi-edit');
         Route::put('evaluasi-update/{id}', [EvaluasiController::class, 'update'])->name('evaluasi-update');
+        Route::get('nilai-junior/{id}', [EvaluasiController::class, 'nilaiJunior'])->name('nilai-junior');
+        Route::post('nilai-junior-store/{id}', [EvaluasiController::class, 'nilaiJuniorStore'])->name('nilai-junior.store');
 });
 
 Route::group(

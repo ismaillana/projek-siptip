@@ -131,8 +131,8 @@
             </li>
 
           <li class="menu-header">Hasil Penilaian</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
+            <li class="nav-item {{ request()->is('karyawan/penilaian*') ? 'active' : '' }}">
+              <a href="{{ route ('penilaian.index')}}" class="nav-link">
                 <i class="fas fa-award"></i>
                 <span>Hasil Penilaian</span></a>
         @endrole

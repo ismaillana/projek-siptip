@@ -11,6 +11,9 @@ use App\Models\User;
 use App\Models\Penugasan;
 use App\Models\Kaderisasi;
 use App\Models\Jurnal;
+use App\Models\Soal;
+use App\Models\Penilaian;
+use App\Models\JurnalFinal;
 
 class PenilaianController extends Controller
 {
@@ -20,32 +23,23 @@ class PenilaianController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $userRole = auth()->user();
-        
-        // dd($userRole->hasRole('karyawan-senior'));
+        $user = auth()->user();
 
-        // if ($userRole->hasRole('karyawan-senior')) {
-        //     $jurnal = Jurnal::join('penugasans', 'jurnals.penugasan_id', '=', 'penugasans.id')
-        //             ->join('kaderisasis', 'penugasans.kaderisasi_id', '=', 'kaderisasis.id')
-        //             ->join('karyawans', 'kaderisasis.id_karyawan_senior', '=', 'karyawans.id')
-        //             ->join('users', 'karyawans.user_id', '=', 'users.id')
-        //             ->where('users.id', $userId)
-        //             ->select('jurnals.id', 'jurnals.file_jurnal', 'jurnals.file_revisi', 'jurnals.status_jurnal', 'penugasans.tugas')
-        //             ->get(); 
-        // } elseif ($userRole->hasRole('karyawan-junior')) {
-        //     $jurnal = Jurnal::join('penugasans', 'jurnals.penugasan_id', '=', 'penugasans.id')
-        //         ->join('kaderisasis', 'penugasans.kaderisasi_id', '=', 'kaderisasis.id')
-        //         ->join('karyawans', 'kaderisasis.id_karyawan_junior', '=', 'karyawans.id')
-        //         ->join('users', 'karyawans.user_id', '=', 'users.id')
-        //         ->where('users.id', $userId)
-        //         ->select('jurnals.id', 'jurnals.file_jurnal', 'jurnals.status_jurnal', 'penugasans.tugas')
-        //         ->get(); 
-        // }
-        $kaderisasi = Kaderisasi()->get();
-        // $jurnal = Jurnal::get();             
+        if ($user->hasRole('karyawan-junior')){
+            $kaderisasi = Kaderisasi::whereHas('karyawanJunior.user', function ($query) use ($userId) {
+                $query->where('id', $userId);
+            })->get();
+        } elseif ($user->hasRole('karyawan-senior')) {
+            $kaderisasi = Kaderisasi::whereHas('karyawanSenior.user', function ($query) use ($userId) {
+                $query->where('id', $userId);
+            })->get();
+        } else {
+            // Jika peran pengguna tidak valid, lakukan penanganan di sini
+            // Misalnya, lemparkan pengecualian atau tampilkan pesan kesalahan
+        }
 
-        return view('admin.penilaian.index', [
-            'jurnal' => $jurnal,
+        return view('admin.hasil_penilaian.index', [
+            'kaderisasi' => $kaderisasi,
             'title'        => 'PTDI|Hasil penilaian'
         ]);
     }
@@ -71,7 +65,24 @@ class PenilaianController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $userId = Auth::id();
+        $kaderisasi = Kaderisasi::find($id);
+        $penilaianJunior = Penilaian::where('kaderisasi_id', $id)
+            ->where('id_penilai', $kaderisasi->id_karyawan_junior)
+            ->get();
+
+        $penilaianSenior = Penilaian::where('kaderisasi_id', $id)
+            ->where('id_penilai', $kaderisasi->id_karyawan_senior)
+            ->get();
+
+        // $penilaianDariJunior = Penilaian::where($penilaian)
+        //     ->where('id_penilai', )
+        return view('admin.hasil_penilaian.detail', [
+            'penilaianJunior' => $penilaianJunior,
+            'penilaianSenior' => $penilaianSenior,
+            'kaderisasi' => $kaderisasi,
+            'title'     => 'PTDI|Detail Hasil penilaian'
+        ]);
     }
 
     /**

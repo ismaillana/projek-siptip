@@ -158,7 +158,7 @@ class JurnalController extends Controller
         return view('admin.penilaian.tambah', [
             'kaderisasi'   => $kaderisasi,
             'soal'         => $soal,
-            'title'        => 'PTDI|Tambah Penilaian Senior'
+            'title'        => 'PTDI|Tambah Penilaian Untuk Senior'
         ]);
     }
 
