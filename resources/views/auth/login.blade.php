@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="{{ asset('node_modules/bootstrap-social/bootstrap-social.css') }}">
 
   <!-- Template CSS -->
+  <link rel="shortcut icon" href="{{asset('/assets/img/PTDI.jpg')}}">
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/components.css')}}">
   <style>

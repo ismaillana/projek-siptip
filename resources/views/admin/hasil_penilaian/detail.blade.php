@@ -53,14 +53,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($penilaianJunior as $item)
+                                        @forelse ($penilaianJunior as $item)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$item->soal}}</td>
                                                 <td>{{$item->nilai_angka}}</td>
                                                 <td>{{$item->nilai_huruf}}</td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            Belum Ada Penilaian
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>                            
@@ -103,14 +105,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($penilaianJunior as $item)
+                                        @forelse ($penilaianSenior as $item)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$item->soal}}</td>
                                                 <td>{{$item->nilai_angka}}</td>
                                                 <td>{{$item->nilai_huruf}}</td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            Belum Ada Penilaian
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>                            
