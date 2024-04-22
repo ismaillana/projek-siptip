@@ -29,6 +29,18 @@ class UserController extends Controller
     }
 
     /**
+     *is_active akun.
+     */
+    public function toggleStatus(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->is_active = !$user->is_active;
+        $user->save();
+
+        return response()->json(['status' => 'Status akun berhasil diubah.']);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

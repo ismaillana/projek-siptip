@@ -64,6 +64,8 @@ Route::group(
     function () {
         Route::resource('user', App\Http\Controllers\UserController::class);
         Route::resource('karyawan', App\Http\Controllers\KaryawanController::class);
+        Route::post('/user/toggle-status', [App\Http\Controllers\UserController::class, 'toggleStatus'])->name('user.toggle.status');
+        Route::post('/karyawan/toggle-status', [App\Http\Controllers\KaryawanController::class, 'toggleStatus'])->name('karyawan.toggle.status');
 });
 
 Route::group(

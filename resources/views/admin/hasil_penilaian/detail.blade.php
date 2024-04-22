@@ -62,7 +62,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="4">Belum Ada Penilaian</td>
+                                                <td colspan="4" style="text-align: center;">Belum Ada Penilaian</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -116,7 +116,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="4">Belum Ada Penilaian</td>
+                                                <td colspan="4" style="text-align: center;">Belum Ada Penilaian</td>
                                             </tr>
                                         @endforelse
                                     </tbody>

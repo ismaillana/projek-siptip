@@ -33,6 +33,15 @@
                                 <hr style="margin-top: -5px;">
                                 <div class="row">
                                     <label for="tugas" class="col-md-2">
+                                        Tanggal Lahir / Usia
+                                    </label>
+                                    <label for="tugas" class="col-md-8">
+                                        <strong>{{$kaderisasi->karyawanJunior->tanggal_lahir}} / {{$kaderisasi->karyawanJunior->umur}} Tahun</strong>
+                                    </label>
+                                </div>
+                                <hr style="margin-top: -5px;">
+                                <div class="row">
+                                    <label for="tugas" class="col-md-2">
                                         Job Code / Title
                                     </label>
                                     <label for="tugas" class="col-md-8">
@@ -70,7 +79,15 @@
                                     </label>
                                 </div>
                                 <hr style="margin-top: -5px;">
-
+                                <div class="row">
+                                    <label for="tugas" class="col-md-2">
+                                        Tanggal Lahir / Usia
+                                    </label>
+                                    <label for="tugas" class="col-md-8">
+                                        <strong>{{$kaderisasi->karyawanSenior->tanggal_lahir}} / {{$kaderisasi->karyawanSenior->umur}} Tahun</strong>
+                                    </label>
+                                </div>
+                                <hr style="margin-top: -5px;">
                                 <p style="margin-top: 20px"><b style="color: #044879">Data Penugasan</b></p>
                                 <div class="mb-3 row">
                                     <label for="tanggal_awal" class="col-md-2 col-form-label">Tanggal Awal <sup

@@ -28,6 +28,24 @@ class KaryawanController extends Controller
         ]);
     }
 
+     /**
+     *is_active akun.
+     */
+    public function toggleStatus(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        $user->is_active = !$user->is_active;
+        $user->save();
+
+        if ($user->is_active) {
+            $status = 'Aktif';
+        } else {
+            $status = 'Nonaktif';
+        }
+
+        return redirect()->back()->with('success', 'Data Berhasil Diupdate');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -58,6 +76,8 @@ class KaryawanController extends Controller
             'kode_pekerjaan'    => 'required',
             'judul_pekerjaan'   => 'required',
             'tanggal_lahir'     => 'required',
+            'umur'              => 'required',
+            'jabatan'           => 'required',
             'status'            => 'required',
         ], [
             'name.required'         => 'Nama Harus Diisi',
@@ -77,6 +97,8 @@ class KaryawanController extends Controller
             'kode_pekerjaan.required'     => 'Kode Pekerjaan Harus Diisi',
             'judul_pekerjaan.required'    => 'Judul Pekerjaan Harus Diisi',
             'tanggal_lahir.required'      => 'Tanggal Lahir Harus Diisi',
+            'umur.required'         => 'Usia Harus Diisi',
+            'jabatan.required'      => 'Jabatan Harus Diisi',
             'status.required'       => 'Status Harus Diisi',
         ]);
 
@@ -100,6 +122,8 @@ class KaryawanController extends Controller
             'judul_pekerjaan'   => $request->judul_pekerjaan,
             'status'            => $request->status,
             'alamat'            => $request->alamat,
+            'umur'              => $request->umur,
+            'jabatan'           => $request->jabatan,
         ];
 
         $karyawan = Karyawan::create($data);
@@ -151,6 +175,8 @@ class KaryawanController extends Controller
             'kode_pekerjaan' => 'required',
             'judul_pekerjaan' => 'required',
             'tanggal_lahir' => 'required',
+            'umur'              => 'required',
+            'jabatan'           => 'required',
         ];
 
         if ($request->email != $user->email) {
@@ -172,6 +198,8 @@ class KaryawanController extends Controller
             'kode_pekerjaan.required' => 'Kode Pekerjaan Harus Diisi',
             'judul_pekerjaan.required' => 'Judul Pekerjaan Harus Diisi',
             'tanggal_lahir.required' => 'Tanggal Lahir Harus Diisi',
+            'umur.required'         => 'Usia Harus Diisi',
+            'jabatan.required'      => 'Jabatan Harus Diisi',
         ]);
 
         $user = $karyawan->user;
@@ -213,6 +241,8 @@ class KaryawanController extends Controller
             'judul_pekerjaan'   => $request->judul_pekerjaan,
             'status'            => $request->status,
             'alamat'            => $request->alamat,
+            'umur'              => $request->umur,
+            'jabatan'           => $request->jabatan,
         ]);
 
         return redirect()->route('karyawan.index')->with('success', 'Data Berhasil Diubah');

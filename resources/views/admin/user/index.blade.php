@@ -49,6 +49,10 @@
                             Role
                         </th>
 
+                        <th>
+                            Status Akun
+                        </th>
+
                         <th style="width: 10%">
                             Aksi
                         </th>
@@ -84,6 +88,14 @@
                                 </td>
 
                                 <td>
+                                  <button class="btn btn-sm btn-outline-secondary toggle-status"
+                                      data-id="{{ $item->id }}"
+                                      data-status="{{ $item->is_active ? 'active' : 'inactive' }}">
+                                      {{ $item->is_active ? 'Nonaktifkan' : 'Aktifkan' }}
+                                  </button>
+                                </td>
+
+                                <td>
                                     <a href="{{ route('user.edit', $item->id) }}" title="Edit" class="btn btn-sm btn-outline-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
@@ -100,4 +112,40 @@
       </div>
     </section>
   </div>  
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.toggle-status').click(function() {
+                var userId = $(this).data('id');
+                var currentStatus = $(this).data('status');
+
+                $.ajax({
+                    url: '{{ route('user.toggle.status') }}',
+                    type: 'POST',
+                    data: {
+                        id: userId,
+                        status: currentStatus
+                    },
+                    success: function(response) {
+                        swal(response.status, {
+                            icon: "success",
+                        }).then((result) => {
+                            location.reload();
+                        });
+                    },
+                    error: function(error) {
+                        console.log('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

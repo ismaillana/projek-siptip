@@ -100,6 +100,57 @@
                             </div>
 
                             <div class="mb-3 row">
+                                <label for="umur" class="col-md-2 col-form-label">Usia <sup
+                                        class="text-danger">*</sup></label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control @error('umur') is-invalid @enderror" 
+                                        maxlength="16" id="umur" name="umur" placeholder="Masukkan Usia"
+                                        value="{{ old('umur', @$karyawan->umur) }}">
+
+                                    @if ($errors->has('umur'))
+                                        <span class="text-danger">
+                                            {{ $errors->first('umur') }}
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="jabatan" class="col-md-2 col-form-label">Pilih Jabatan <sup
+                                        class="text-danger">*</sup></label>
+                                <div class="col-md-10">
+                                    <select name="jabatan"
+                                        class="form-control selectric @error('jabatan') is-invalid @enderror">
+                                        <option value="" selected="" disabled="">
+                                            Pilih Jabatan
+                                        </option>
+                                        <option value="DIREKTUR"
+                                            {{ old('jabatan', @$karyawan->jabatan) == 'DIREKTUR' ? 'selected' : '' }}>
+                                                DIREKTUR</option>
+                                        <option value="GENERAL MANAGER/SENIOR VICE PRESIDENT"
+                                            {{ old('jabatan', @$karyawan->jabatan) == 'GENERAL MANAGER/SENIOR VICE PRESIDENT' ? 'selected' : '' }}>
+                                                GENERAL MANAGER/SENIOR VICE PRESIDENT</option>
+                                        <option value="KEPALA DIVISI"
+                                            {{ old('jabatan', @$karyawan->jabatan) == 'KEPALA DIVISI' ? 'selected' : '' }}>
+                                                KEPALA DIVISI</option>
+                                        <option value="MANAGER"
+                                            {{ old('jabatan', @$karyawan->jabatan) == 'MANAGER' ? 'selected' : '' }}>
+                                                MANAGER</option>
+                                        <option value="SUPERVISOR"
+                                            {{ old('jabatan', @$karyawan->jabatan) == 'SUPERVISOR' ? 'selected' : '' }}>
+                                                SUPERVISOR</option>
+                                        <option value="STAFF"
+                                            {{ old('jabatan', @$karyawan->jabatan) == 'STAFF' ? 'selected' : '' }}>
+                                                STAFF</option>
+                                    </select>
+
+                                    @if ($errors->has('jabatan'))
+                                        <span class="text-danger">{{ $errors->first('jabatan') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
                                 <label for="organisasi" class="col-md-2 col-form-label">Organisasi <sup
                                         class="text-danger">*</sup></label>
                                 <div class="col-md-10">
@@ -272,6 +323,11 @@
         }
 
         document.getElementById('nik').addEventListener('input', function(evt) {
+            var input = evt.target;
+            input.value = input.value.replace(/[^0-9]/g, ''); 
+        });
+
+        document.getElementById('umur').addEventListener('input', function(evt) {
             var input = evt.target;
             input.value = input.value.replace(/[^0-9]/g, ''); 
         });
