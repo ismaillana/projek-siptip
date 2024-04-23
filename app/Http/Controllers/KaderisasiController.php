@@ -42,13 +42,15 @@ class KaderisasiController extends Controller
         })->get();
 
         $karyawanJunior = Karyawan::where('status', 'Junior')
-            ->join('users', 'karyawans.user_id', '=', 'users.id')
-            ->where('users.is_active', true) // Add this condition
+            ->whereHas('user', function ($query) {
+                $query->where('is_active', true);
+            })
             ->get();
 
         $karyawanSenior = Karyawan::where('status', 'Senior')
-            ->join('users', 'karyawans.user_id', '=', 'users.id')
-            ->where('users.is_active', true) // Add this condition
+            ->whereHas('user', function ($query) {
+                $query->where('is_active', true);
+            })
             ->get();
 
         return view('admin.kaderisasi.tambah', [
